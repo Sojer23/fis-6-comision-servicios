@@ -1,0 +1,34 @@
+{
+  "consumer": {
+    "name": "client"
+  },
+  "provider": {
+    "name": "ContactService"
+  },
+  "interactions": [
+    {
+      "description": "a request to retrieve contacts list",
+      "providerState": "it has one contact",
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/contacts"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": [
+          {
+            "name": "Foo",
+            "phone": 777
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
