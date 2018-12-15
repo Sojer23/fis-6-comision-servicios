@@ -10,15 +10,19 @@ El repositorio se descargará sin ninguna dependencia, para instalar todas las d
 `npm install` 
 
 ### Contrucción de la Aplicación
-Una vez instaladas las dependencias pasamos a contruir la aplicaicón con el siguiente comando. A partir de aquí, se verá en la raíz del repositorio una carpeta llamada `/dist`.
+Una vez instaladas las dependencias pasamos a contruir la aplicaicón con el siguiente comando. 
+
 `npm run-script build`
+
+A partir de aquí, se verá en la raíz del repositorio una carpeta llamada `/dist`.
+
 
 ### Base de datos
 Un paso previo a la ejecución de la aplicación, es la puesta en marcha de la base de datos. En este proyecto se está trabajando con MongoDB. La configuración del proyecto está enfocada a conexión en local(localhost) o en remoto (MongoLab).
 
 #### Ejecución en Local
 - Con aplicación MongoDB: `mongod`
-- Con contenedor de Docker: - `docker pull mongo` - `docker run --name nombre_contenedor -d mongo:tag`
+- Con contenedor de Docker: 1. `docker pull mongo` 2. `docker run --name nombre_contenedor -d mongo:tag`
 #### Ejecución en Remoto
 - Tener configurado e introducir URL, asignada por MongoLab, por variable de entorno.
 
@@ -26,6 +30,6 @@ Un paso previo a la ejecución de la aplicación, es la puesta en marcha de la b
 ### Lanzamiento
 Para lanzar la aplicación se usa el siguiente comando:
 `npm start`
-Tras la ejecución del comando en la consola nos aparecerá el puerto en el que se está ejecutando. Por lo general se ejecutará en la siguiente URL: `http://localhost:4200/`
+Tras la ejecución del comando en la consola nos aparecerá el puerto en el que se está ejecutando. Por lo general se ejecutará en la siguiente URL: `http://localhost:3000/`
 
 Si accedemos al navegador debería estar disponible.
