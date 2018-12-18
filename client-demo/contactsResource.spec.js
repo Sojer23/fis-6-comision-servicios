@@ -7,33 +7,28 @@ const interactions = require('./mockServer/interactions');
 const expect = chai.expect
 
 describe('contacts api', () => {
-    before((done) => {
-        provider.setup().then(() => done());
-    })
+    before(() => provider.setup());
 
-    after((done) => {
-        provider.finalize().then(() => done());        
-    })
+    after(() => provider.finalize());
+    
+    afterEach(() => provider.verify());
 
     describe('#getAllContacts', () => {
-        it('should get contact list from server', (done) => {
+        before(done => {
             provider.addInteraction(interactions.getContactList)
-              .then(() => {
-                  return contactsResource.getAllContacts();
-              })
+                .then(() => {
+                    done();
+                })
+        });
+
+        it('should get contact list from server', (done) => {
+            contactsResource.getAllContacts()
               .then((contacts) => {
                 expect(contacts).to.have.lengthOf(1);
                 expect(contacts).to.contain.an.item.with.property('name', 'Foo');
                 expect(contacts).to.contain.an.item.with.property('phone', 777);
-              })
-              .then(() => {
-                  provider.verify();
-                  done();
-              })
-              .catch((error) => {
-                  done(error);
-              })
-              
+                done();
+              }, done);
         }) 
     })
 })

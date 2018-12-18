@@ -55,5 +55,3 @@ db.once('open', function() {
         process.exit(1)
     });
 });
-
-   
