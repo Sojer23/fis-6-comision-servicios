@@ -2,14 +2,16 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var path = require('path');
-var Contact = require('./contacts');
+var Comision = require('./comisiones');
 var ApiKey = require('./apikeys');
 
 var passport = require('passport');
 var LocalAPIKey = require('passport-localapikey-update').Strategy;
 
-const CONTACTS_APP_DIR = "/dist/contacts-app"; 
+const COMISIONES_APP_DIR = "/dist/comisiones-app";
 var BASE_API_PATH = "/api/v1";
+
+const ESTADOS = ["SOLICITADA", "ACEPTADA", "RECHAZADA", "SUBSANACION"]
 
 
 
@@ -32,22 +34,36 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, CONTACTS_APP_DIR))); 
-app.get('/', function(req, res) { 
-    res.sendFile(path.join(__dirname, CONTACTS_APP_DIR, '/index.html')); 
-}); 
+app.use(express.static(path.join(__dirname, COMISIONES_APP_DIR)));
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, COMISIONES_APP_DIR, '/index.html'));
+});
 
+// Funciones auxiliares
 
-app.get(BASE_API_PATH + "/contacts", 
-        passport.authenticate('localapikey', {session:false}), 
+function checkComision(comision){
+  if(!comision._id || !comision.investigadorID || !comision.destino || !comision.fechaInicio || !comision.fechaFin || !comision.sustitutoID || !comision.razon || !comision.coste || !comision.proyectoID || !comision.estado){
+    return false
+  }
+  if(ESTADOS.includes(comision.estado)){
+    return false
+  }
+  return true
+}
+
+// GET
+
+// Para el administrador puede solicitar todo, después se filtra en el front end por ESTADO
+app.get(BASE_API_PATH + "/comisiones",
+        passport.authenticate('localapikey', {session:false}),
         (req, res) => {
-            Contact.find((err, contacts) => {
+            Comision.find((err, comisiones) => {
                 if (err) {
                     console.error("Error accessing database");
                     res.sendStatus(500);
                 } else {
-                    res.send(contacts.map((contact) => {
-                        return contact.cleanup();
+                    res.send(comisiones.map((comision) => {
+                        return comision.cleanup();
                     }));
                 }
             });
@@ -55,11 +71,59 @@ app.get(BASE_API_PATH + "/contacts",
 );
 
 
-app.post(BASE_API_PATH + "/contacts", (req, res) => {
-    // Create a new contact
-    console.log(Date()+" - POST /contacts");
-    var contact = req.body;
-    Contact.create(contact, (err) => {
+// Para los investigadores le damos sus comisiones
+app.get(BASE_API_PATH + "/comisiones/:investigadorID", (req, res) => {
+    // Get a single comision
+    var investigadorID = req.params.investigadorID;
+    console.log(Date()+" - GET /comisiones/"+investigadorID);
+
+    Comision.find({"investigadorID": investigadorID},(err,comisiones)=>{
+        if(err){
+            console.error("Error accesing DB");
+            res.sendStatus(500);
+        }else{
+            res.send(comisiones.map((comision)=>{
+                return comision;
+            }));
+        }
+    });
+});
+
+// Comisiones de cada proyecto
+app.get(BASE_API_PATH + "/comisiones/:proyectoID", (req, res) => {
+    // Get a single comision
+    var proyectoID = req.params.proyectoID;
+    console.log(Date()+" - GET /comisiones/"+proyectoID);
+
+    Comision.find({"proyectoID": proyectoID},(err,comisiones)=>{
+        if(err){
+            console.error("Error accesing DB");
+            res.sendStatus(500);
+        }else{
+            res.send(comisiones.map((comision)=>{
+                return comision;
+            }));
+        }
+    });
+});
+
+// POST
+
+// Post basico
+app.post(BASE_API_PATH + "/comisiones", (req, res) => {
+    // Create a new comision
+    if (!req.body){
+      res.sendStatus(400);
+      return;
+    }
+    console.log(Date()+" - POST /comisiones");
+    var comision = req.body;
+    comision.estado = "SOLICITADA";
+    if(!checkComision(comision)){
+      res.sendStatus(422);
+      return;
+    }
+    Comision.create(comision, (err) => {
         if (err) {
             console.error(err);
             res.sendStatus(500);
@@ -69,109 +133,30 @@ app.post(BASE_API_PATH + "/contacts", (req, res) => {
     });
 });
 
-app.put(BASE_API_PATH + "/contacts", (req, res) => {
-    // Forbidden
-    console.log(Date()+" - PUT /contacts");
-    res.sendStatus(405);
-});
+// PUT
 
-app.delete(BASE_API_PATH + "/contacts", (req, res) => {
-    // Remove all contacts
-    console.log(Date()+" - DELETE /contacts");
-    db.remove({});    
-    res.sendStatus(200);
-});
+// Put para que el administrador cambie el estado
+app.put(BASE_API_PATH + "/comisiones", (req, res) => {
+    // Update comision
+    var updatedComision = req.body;
+    console.log(Date()+" - PUT /comisiones/"+updatedComision._id);
 
-
-app.post(BASE_API_PATH + "/contacts/:name", (req, res) => {
-    // Forbidden
-    console.log(Date()+" - POST /contacts");
-    res.sendStatus(405);
-});
-
-
-
-app.get(BASE_API_PATH + "/contacts/:name", (req, res) => {
-    // Get a single contact
-    var name = req.params.name;
-    console.log(Date()+" - GET /contacts/"+name);
-
-    db.find({"name": name},(err,contacts)=>{
-        if(err){
-            console.error("Error accesing DB");
-            res.sendStatus(500);
-        }else{
-            if(contacts.length>1){
-                console.warn("Incosistent DB: duplicated name");
-            }
-            res.send(contacts.map((contact)=>{
-                delete contact._id;
-                return contact;
-            })[0]);
-        }
-    });
-});
-
-
-app.delete(BASE_API_PATH + "/contacts/:name", (req, res) => {
-    // Delete a single contact
-    var name = req.params.name;
-    console.log(Date()+" - DELETE /contacts/"+name);
-
-    db.remove({"name": name},{},(err,numRemoved)=>{
-        if(err){
-            console.error("Error accesing DB");
-            res.sendStatus(500);
-        }else{
-            if(numRemoved>1){
-                console.warn("Incosistent DB: duplicated name");
-            }else if(numRemoved == 0) {
-                res.sendStatus(404);
-            } else {
-                res.sendStatus(200);
-            }
-        }
-    });
-});
-app.delete(BASE_API_PATH + "/contacts/:name", (req, res) => {
-    // Delete a single contact
-    var name = req.params.name;
-    console.log(Date()+" - DELETE /contacts/"+name);
-
-    db.remove({"name": name},{},(err,numRemoved)=>{
-        if(err){
-            console.error("Error accesing DB");
-            res.sendStatus(500);
-        }else{
-            if(numRemoved>1){
-                console.warn("Incosistent DB: duplicated name");
-            }else if(numRemoved == 0) {
-                res.sendStatus(404);
-            } else {
-                res.sendStatus(200);
-            }
-        }
-    });
-});
-
-app.put(BASE_API_PATH + "/contacts/:name", (req, res) => {
-    // Update contact
-    var name = req.params.name;
-    var updatedContact = req.body;
-    console.log(Date()+" - PUT /contacts/"+name);
-
-    if(name != updatedContact.name){
-        res.sendStatus(409);
+    if(!updatedComision){
+        res.sendStatus(400);
+        return;
+    }
+    if(!checkComision(updatedComision)){
+        res.sendStatus(422);
         return;
     }
 
-    db.update({"name": name},updatedContact,(err,numUpdated)=>{
+    Comision.update({"_id": updatedComision._id},updatedComision,(err,numUpdated)=>{
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
         }else{
             if(numUpdated>1){
-                console.warn("Incosistent DB: duplicated name");
+                console.warn("Incosistent DB: duplicated id");
             }else if(numUpdated == 0) {
                 res.sendStatus(404);
             } else {
@@ -180,5 +165,37 @@ app.put(BASE_API_PATH + "/contacts/:name", (req, res) => {
         }
     });
 });
+
+// DELETE
+
+app.delete(BASE_API_PATH + "/comisiones", (req, res) => {
+    // Remove all comisiones
+    console.log(Date()+" - DELETE /comisiones");
+    Comision.remove({});
+    res.sendStatus(200);
+});
+
+
+app.delete(BASE_API_PATH + "/comisiones/:id", (req, res) => {
+    // Delete a single comision
+    var _id = req.params._id;
+    console.log(Date()+" - DELETE /comisiones/"+_id);
+
+    Comision.remove({"id": _id},{},(err,numRemoved)=>{
+        if(err){
+            console.error("Error accesing DB");
+            res.sendStatus(500);
+        }else{
+            if(numRemoved>1){
+                console.warn("Incosistent DB: duplicated id");
+            }else if(numRemoved == 0) {
+                res.sendStatus(404);
+            } else {
+                res.sendStatus(200);
+            }
+        }
+    });
+});
+
 
 module.exports.app = app;
