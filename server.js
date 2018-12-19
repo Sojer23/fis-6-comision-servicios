@@ -8,7 +8,7 @@ var ApiKey = require('./apikeys');
 var passport = require('passport');
 var LocalAPIKey = require('passport-localapikey-update').Strategy;
 
-const COMISIONES_APP_DIR = "/dist/comisiones-app";
+const COMISIONES_APP_DIR = "/dist/contacts-app";
 var BASE_API_PATH = "/api/v1";
 
 const ESTADOS = ["SOLICITADA", "ACEPTADA", "RECHAZADA", "SUBSANACION"]
