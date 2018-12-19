@@ -2,7 +2,7 @@ var server = require('./server');
 var mongoose = require('mongoose');
 var ApiKey = require('./apikeys');
 var port = (process.env.PORT || 3000);
-var dbUrl = (process.env.DB || 'mongodb://localhost/test');
+var dbUrl = (process.env.DB || 'mongodb://localhost:27017');
 
 console.log("Starting API server...");
 mongoose.connect(dbUrl);
@@ -14,7 +14,7 @@ db.once('open', function() {
 
     if (ApiKey.find((err, apikeys) => {
         if (apikeys.length == 0) {
-            var testUser = new ApiKey({user: "fis", password: "asdf"});
+            var testUser = new ApiKey({user: "fis06", password: "asdf"});
             testUser.save(function(err, user) {
                 if(err) {
                     console.log(err);
