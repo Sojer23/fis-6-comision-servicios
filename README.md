@@ -33,3 +33,8 @@ Para lanzar la aplicación se usa el siguiente comando:
 Tras la ejecución del comando en la consola nos aparecerá el puerto en el que se está ejecutando. Por lo general se ejecutará en la siguiente URL: `http://localhost:3000/`
 
 Si accedemos al navegador debería estar disponible.
+
+### Lanzamiento Remoto
+
+- URL Heroku: https://fis2018-06.herokuapp.com
+- Acceso a recursos comisiones: https://fis2018-06.herokuapp.com/api/v1/comisiones
