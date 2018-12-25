@@ -1,3 +1,5 @@
+// initialize .env file variables
+require('dotenv').config();
 var server = require('./server');
 var mongoose = require('mongoose');
 var ApiKey = require('./apikeys');
