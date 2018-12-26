@@ -1,3 +1,4 @@
+var server = require('./src/server');
 var mongoose = require('mongoose');
 var ApiKey = require('./src/models/apikeys');
 var Comision = require('./src/models/comisiones.js');
