@@ -1,6 +1,7 @@
-var server = require('./server');
+var server = require('./src/server');
 var mongoose = require('mongoose');
-var ApiKey = require('./apikeys');
+var ApiKey = require('./src/models/apikeys');
+var Comision = require('./src/models/comisiones.js');
 var port = (process.env.PORT || 3000);
 var dbUrl = (process.env.DB || 'mongodb://localhost:27017');
 
@@ -10,6 +11,14 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     server.app.listen(port);
+
+    if(dbUrl === process.env.DB){
+        console.log("Coneccted to Database! (REMOTE)")
+    }else{
+        console.log("Coneccted to Database! (LOCAL)")
+    }
+    
+
     console.log("Server ready!");
 
     if (ApiKey.find((err, apikeys) => {
@@ -22,7 +31,7 @@ db.once('open', function() {
                     console.log('user: ' + user.user + ", "+ user.apikey + " saved.");
                   }
             });        
-        }    
+        }
+
     }));
 });
-

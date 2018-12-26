@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 var comisionSchema = new mongoose.Schema({
     investigadorID: String,
     destino: String,
-    fechaInicio: Date,
-    fechaFin: Date,
+    fechaInicio: String,
+    fechaFin: String,
     sustitutoID: String,
     razon: String,
     coste: Number,
@@ -26,4 +26,5 @@ var comisionSchema = new mongoose.Schema({
 
 var Comision = mongoose.model('Comision', comisionSchema);
 
-module.exports = Comision;
+module.exports.mongoose = mongoose;
+module.exports.Comision = Comision;
