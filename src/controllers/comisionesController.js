@@ -166,10 +166,10 @@ function _putComision(req,res){
             res.sendStatus(400);
             return;
         }
-        if(!checkComision(updatedComision)){
+        /*if(!checkComision(updatedComision)){
             res.sendStatus(422);
             return;
-        }
+        }*/
 
         ComisionDB.update({"_id": updatedComision._id},updatedComision,(err,numUpdated)=>{
             if(err){
@@ -208,7 +208,7 @@ function _deleteComisionById(req,res){
         var _id = req.params._id;
         console.log(Date()+" - DELETE /comisiones/"+_id);
 
-        ComisionDB.remove({"id": _id},{},(err,numRemoved)=>{
+        ComisionDB.remove({"_id": _id},{},(err,numRemoved)=>{
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
