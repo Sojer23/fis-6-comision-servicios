@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-var server = require('./src/server');
-=======
-// initialize .env file variables
-require('dotenv').config();
-var server = require('./server');
->>>>>>> b5be19cf5b63c7667bb3fb215648e24bb83bba1a
 var mongoose = require('mongoose');
 var ApiKey = require('./src/models/apikeys');
 var Comision = require('./src/models/comisiones.js');
