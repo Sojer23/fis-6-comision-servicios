@@ -1,7 +1,7 @@
-var server = require('./src/server');
+var server = require('./srcApi/server');
 var mongoose = require('mongoose');
-var ApiKey = require('./src/models/apikeys');
-var Comision = require('./src/models/comisiones.js');
+var ApiKey = require('./srcApi/models/apikeys');
+var Comision = require('./srcApi/models/comisiones.js');
 var port = (process.env.PORT || 3000);
 var dbUrl = (process.env.DB || 'mongodb://localhost:27017');
 

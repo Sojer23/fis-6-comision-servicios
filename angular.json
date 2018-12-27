@@ -5,7 +5,7 @@
   "projects": {
     "comisiones-app": {
       "root": "",
-      "sourceRoot": "public/src",
+      "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {},
