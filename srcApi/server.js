@@ -17,7 +17,7 @@ var ApiKey = require('./models/apikeys');
 
 var LocalAPIKey = require('passport-localapikey-update').Strategy;
 
-const COMISIONES_APP_DIR = "/dist/comisiones-app";
+const COMISIONES_APP_DIR = "../dist/comisiones-app";
 var BASE_API_PATH = "/api/v1";
 
 
