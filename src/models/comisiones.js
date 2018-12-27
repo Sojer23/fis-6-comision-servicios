@@ -12,9 +12,9 @@ var comisionSchema = new mongoose.Schema({
     estado: String
 });
 
-/*comisionSchema.methods.cleanup = function() {
-    return {investigadorID = this.investigadorID,
-        destino = this.destino,
+comisionSchema.methods.cleanup = function() {
+    return {investigadorID : this.investigadorID,
+        destino : this.destino,
         fechaInicio: this.fechaInicio,
         fechaFin: this.fechaFin,
         sustitutoID: this.sustitutoID,
@@ -22,7 +22,7 @@ var comisionSchema = new mongoose.Schema({
         coste: this.coste,
         proyectoID: this.proyectoID,
         estado: this.estado};
-}*/
+}
 
 var Comision = mongoose.model('Comision', comisionSchema);
 
