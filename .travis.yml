@@ -18,7 +18,7 @@ install:
 script:
   - ng build --prod --aot
   # build docker images
-  - docker build -t comisiones .
+  - docker build -t fis18-06 .
 
 #Si no ha habido errores hace el despliegue
 deploy:
