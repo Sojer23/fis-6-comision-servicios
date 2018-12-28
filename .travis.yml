@@ -17,7 +17,7 @@ script:
   - ng build --prod --aot
   - npm test
   # build docker images
-  - docker build -t comision-servicios .
+  - docker build -t comisiones .
 
 deploy:
   provider: script
