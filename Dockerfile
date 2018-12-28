@@ -9,9 +9,6 @@ RUN npm install
 
 COPY index.js .
 COPY srcApi srcApi
-# COPY srcApi/models/comisiones.js srcApi/models/
-# COPY srcApi/models/apikeys.js srcApi/models/
-# COPY srcApi/server.js srcApi/
 COPY dist dist
 
 #RUN ng build --prod
