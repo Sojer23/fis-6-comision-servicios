@@ -17,6 +17,7 @@ var ApiKey = require('./models/apikeys');
 
 var LocalAPIKey = require('passport-localapikey-update').Strategy;
 
+//Unión de front-end y back-end
 const COMISIONES_APP_DIR = "../dist/comisiones-app";
 var BASE_API_PATH = "/api/v1";
 
