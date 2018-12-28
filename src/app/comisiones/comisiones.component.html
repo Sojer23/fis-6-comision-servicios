@@ -1,0 +1,42 @@
+<div *ngIf="selectedComision">
+  {{selectedComision.name}}
+</div>
+
+<table class="table">
+  <thead>
+      <tr>
+          <th>Investigador</th>
+          <th>Destino</th>
+          <th>Fecha de inicio</th>
+          <th>Fecha de fin</th>
+          <th>Sustituto</th>
+          <th>Razón</th>
+          <th>Coste</th>
+          <th>Proyecto</th>
+          <th>Estado</th>
+          <th>&nbsp;</th>
+      </tr>
+  </thead>  
+  
+  <tr>
+      <td><input class="form-control" [(ngModel)]="newComision.investigadorID"></td>
+      <td><input class="form-control" [(ngModel)]="newComision.destino"></td>
+      <td><input class="form-control" [(ngModel)]="newComision.fechaInicio"></td>
+      <td><input class="form-control" [(ngModel)]="newComision.fechaFin"></td>
+      <td><input class="form-control" [(ngModel)]="newComision.sustitutoID"></td>
+      <td><input class="form-control" [(ngModel)]="newComision.razon"></td>
+      <td><input class="form-control" [(ngModel)]="newComision.coste"></td>
+      <td><input class="form-control" [(ngModel)]="newComision.proyectoID"></td>
+      <td><input class="form-control" [(ngModel)]="newComision.estado"></td>
+      <td><button class="btn btn-primary" (click)="addComision()">Añadir comisión</button> </td>
+  </tr>     
+     
+    <tr *ngFor="let comision of comisiones">
+        <td>{{comision.investigadorID}}</td>
+        <td>{{comision.destino}}</td>
+    </tr>    
+</table>
+
+<!-- <tr *ngFor="let comision of comisiones" app-editable-contact [comision]="comision">
+</tr>    
+</table> -->

@@ -4,14 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ContactsComponent } from './contacts/contacts.component';
-import { EditableContactComponent } from './editable-contact/editable-contact.component';
+import { ComisionesComponent } from './comisiones/comisiones.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactsComponent,
-    EditableContactComponent
+    ComisionesComponent,
   ],
   imports: [
     BrowserModule,
