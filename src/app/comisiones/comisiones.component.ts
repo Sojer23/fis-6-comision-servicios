@@ -29,20 +29,24 @@ export class ComisionesComponent implements OnInit {
   constructor(private comisionService: ComisionService) { }
 
   addComision() {
-    this.comisiones.push(this.newComision);
-    this.newComision = {
-      investigadorID: null,
-      destino: null,
-      fechaInicio: null,
-      fechaFin: null,
-      sustitutoID: null,
-      razon: null,
-      coste: null,
-      proyectoID: null,
-      estado: null,
+    this.comisionService.addComision(this.newComision)
+      .subscribe(() => {
+        this.comisiones.push(this.newComision);
+        this.newComision = {
+          investigadorID: null,
+          destino: null,
+          fechaInicio: null,
+          fechaFin: null,
+          sustitutoID: null,
+          razon: null,
+          coste: null,
+          proyectoID: null,
+          estado: null
+        };
+      });
     }
-  }
 
+    
   getComisiones() {
     this.comisionService.getComisiones()
       .subscribe((comisiones) => {
