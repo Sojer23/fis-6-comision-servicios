@@ -1,9 +1,10 @@
-var server = require('./srcApi/server');
+var server = require('./srcApi/server.js');
 var mongoose = require('mongoose');
-var ApiKey = require('./srcApi/models/apikeys');
+var ApiKey = require('./srcApi/models/apikeys.js');
 var Comision = require('./srcApi/models/comisiones.js');
 var port = (process.env.PORT || 3000);
-var dbUrl = (process.env.DB || 'mongodb://localhost:27017');
+var dbUrl = (process.env.DB || 'mongodb://admin6:comision_servicios6@ds137404.mlab.com:37404/fis-6-comision-servicios'
+|| 'mongodb://localhost:27017');
 
 console.log("Starting API server...");
 mongoose.connect(dbUrl);
