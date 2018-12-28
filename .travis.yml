@@ -2,29 +2,31 @@ sudo: required
 language: node_js
 node_js:
   - "9"
+#Servicios que se van a usar  
 services:
   - docker
-  - mongodb
 
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
 
+#Ejecución  de comandos que instalan dependencias
 install:
   - npm install
   - npm install -g @angular/cli
 
+#Ejecución de comandos
 script:
   - ng build --prod --aot
-  - npm test
   # build docker images
   - docker build -t comisiones .
 
+#Si no ha habido errores hace el despliegue
 deploy:
   provider: script
-  skip_cleanup: true
+  skip_cleanup: true #Si no pongo esto me borra la carpeta dist
   script:
     # push to heroku
     heroku container:login;
     heroku container:push web -a $HEROKU_APP_NAME;
     heroku container:release web -a $HEROKU_APP_NAME;
-  branch: master
+  branch: master #vinculado a cualquier actualización en la rama master
