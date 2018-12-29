@@ -10,10 +10,13 @@ import { EditableComisionComponent } from './editable-comision/editable-comision
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ListComisionesComponent } from './list-comisiones/list-comisiones.component';
+import { estadoFilter } from './estadoFilter.pipe';
 import { ProfileComponent } from './profile/profile.component';
 
 //Import Auth0 Service
 import { AuthService } from './services/auth.service';
+
+
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { AuthService } from './services/auth.service';
     HomeComponent,
     ListComisionesComponent,
     ProfileComponent,
+    estadoFilter
   ],
   imports: [
     BrowserModule,

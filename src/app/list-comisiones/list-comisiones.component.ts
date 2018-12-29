@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Comision } from '../comision';
 import { ComisionService } from '../comision.service';
-
+import { estadoFilter } from '../estadoFilter.pipe'
 
 @Component({
   selector: 'app-list-comisiones',
@@ -11,6 +11,9 @@ import { ComisionService } from '../comision.service';
 export class ListComisionesComponent implements OnInit {
 
   comisiones: Comision[];
+  selectedEstado: String = "TODAS";
+  estados = ["SOLICITADA", "SUBSANACION","ACEPTADA", "RECHAZADA"]
+
 
   constructor(private comisionService: ComisionService) { }
 
