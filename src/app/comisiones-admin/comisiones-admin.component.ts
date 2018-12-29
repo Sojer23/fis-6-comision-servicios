@@ -4,11 +4,11 @@ import { ComisionService } from '../comision.service';
 import { estadoFilter } from '../estadoFilter.pipe'
 
 @Component({
-  selector: 'app-list-comisiones',
-  templateUrl: './list-comisiones.component.html',
-  styleUrls: ['./list-comisiones.component.css']
+  selector: 'app-comisiones-admin',
+  templateUrl: './comisiones-admin.component.html',
+  styleUrls: ['./comisiones-admin.component.css']
 })
-export class ListComisionesComponent implements OnInit {
+export class ComisionesAdminComponent implements OnInit {
 
   comisiones: Comision[];
   selectedEstado: String = "TODAS";

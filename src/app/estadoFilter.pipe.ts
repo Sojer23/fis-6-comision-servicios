@@ -13,7 +13,7 @@ export class estadoFilter implements PipeTransform {
       return comisiones.filter(comisiones => comisiones.estado == estado);
     }
     else{
-      return comisiones
+      return comisiones.sort((a,b) => this.ESTADOS.indexOf(a.estado)- this.ESTADOS.indexOf(b.estado));
     }
   }
 }

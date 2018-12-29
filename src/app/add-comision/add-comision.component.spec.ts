@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComisionesComponent } from './comisiones.component';
+import { AddComisionComponent } from './add-comision.component';
 
-describe('ComisionesComponent', () => {
-  let component: ComisionesComponent;
-  let fixture: ComponentFixture<ComisionesComponent>;
+describe('AddComisionComponent', () => {
+  let component: AddComisionComponent;
+  let fixture: ComponentFixture<AddComisionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComisionesComponent ]
+      declarations: [ AddComisionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComisionesComponent);
+    fixture = TestBed.createComponent(AddComisionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

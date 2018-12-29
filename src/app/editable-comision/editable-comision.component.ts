@@ -12,6 +12,7 @@ export class EditableComisionComponent implements OnInit {
 
   @Input() comision: Comision;
   editable = false;
+  updatedEstado = null;
   estados = ["SOLICITADA", "ACEPTADA", "RECHAZADA", "SUBSANACION"]
 
 
@@ -21,6 +22,7 @@ export class EditableComisionComponent implements OnInit {
   
   onEdit(): void {
     if (this.editable) {
+      this.comision.estado = this.updatedEstado;
       this.comisionService.updateComision(this.comision)
          .subscribe(() => this.editable = !this.editable);
     } else {
@@ -30,6 +32,7 @@ export class EditableComisionComponent implements OnInit {
 
 
   ngOnInit() {
+    this.updatedEstado = this.comision.estado;
   }
 
 }

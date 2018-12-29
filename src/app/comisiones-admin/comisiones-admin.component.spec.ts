@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListComisionesComponent } from './list-comisiones.component';
+import { ComisionesAdminComponent } from './comisiones-admin.component';
 
-describe('ListComisionesComponent', () => {
-  let component: ListComisionesComponent;
-  let fixture: ComponentFixture<ListComisionesComponent>;
+describe('ComisionesAdminComponent', () => {
+  let component: ComisionesAdminComponent;
+  let fixture: ComponentFixture<ComisionesAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListComisionesComponent ]
+      declarations: [ ComisionesAdminComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListComisionesComponent);
+    fixture = TestBed.createComponent(ComisionesAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

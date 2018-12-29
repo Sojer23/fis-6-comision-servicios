@@ -1,0 +1,33 @@
+<!-- <div *ngFor="let estado of estados">
+    <input type="button" class="form-control" value= "estado" [(ngModel)]="selectedEstado">
+</div> -->
+<div class="form-group row my-2">
+    <label class="col-sm-3 col-form-label">Filtrar por estado:</label>
+    <div class="col-sm-6">
+    <select class="form-control " [(ngModel)]="selectedEstado">
+            <option value="TODAS" selected>TODAS</option>
+            <option *ngFor="let estado of estados" [ngValue]="estado">{{estado}}</option>
+    </select>
+    </div>
+    </div>
+    
+    <table class="table table-responsive">
+        <thead class="thead-dark">
+            <tr>
+                <th>Investigador</th>
+                <th>Destino</th>
+                <th>F. inicio</th>
+                <th>F. fin</th>
+                <th>Sustituto</th>
+                <th>Razón</th>
+                <th>Coste</th>
+                <th>Proyecto</th>
+                <th>Estado</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>  
+    
+        
+    <tr *ngFor="let comision of comisiones | estadoFilter:selectedEstado" app-editable-comision [comision]="comision">
+    </tr>   
+      

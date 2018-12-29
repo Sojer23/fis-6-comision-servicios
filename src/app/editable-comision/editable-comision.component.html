@@ -8,7 +8,7 @@
 <td>{{comision.proyectoID}}</td>
 <td *ngIf="!editable">{{comision.estado}}</td>
 <td *ngIf="editable">
-    <select class="form-control" [(ngModel)]="comision.estado">
+    <select class="form-control" [(ngModel)]="updatedEstado">
         <option *ngFor="let estado of estados" [ngValue]="estado">{{estado}}</option>
     </select>   
 </td>
@@ -37,4 +37,5 @@
 
 
 
-<td><button class="btn" (click)="onEdit()">{{editable ? 'Save': 'Edit'}}</button></td>
+<td *ngIf="comision.estado=='SOLICITADA' || comision.estado=='SUBSANACION' ">
+    <button class="btn" (click)="onEdit()">{{editable ? 'Guardar': 'Editar'}}</button></td>
