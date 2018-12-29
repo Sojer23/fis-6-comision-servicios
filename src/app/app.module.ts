@@ -4,12 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { routing }  from './app.routing';
+import { routing, appRoutingProviders }  from './app.routing';
 import { ComisionesComponent } from './comisiones/comisiones.component';
 import { EditableComisionComponent } from './editable-comision/editable-comision.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ListComisionesComponent } from './list-comisiones/list-comisiones.component';
+import { ProfileComponent } from './profile/profile.component';
+
+//Import Auth0 Service
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,7 @@ import { ListComisionesComponent } from './list-comisiones/list-comisiones.compo
     LoginComponent,
     HomeComponent,
     ListComisionesComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,7 @@ import { ListComisionesComponent } from './list-comisiones/list-comisiones.compo
     HttpClientModule,
     routing
   ],
-  providers: [],
+  providers: [appRoutingProviders, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

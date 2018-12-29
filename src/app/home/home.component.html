@@ -1,1 +1,5 @@
-<app-list-comisiones>
+<!--<app-list-comisiones>-->
+
+        <h1>Welcome</h1>
+        <div class="alert alert-success" *ngIf="auth.isAuthenticated()">You are logged in</div>
+        <div class="alert alert-danger" *ngIf="!auth.isAuthenticated()">You are not logged in</div>
