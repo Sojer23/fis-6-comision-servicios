@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Investigador</th>
+            <th>Destino</th>
+            <th>Fecha de inicio</th>
+            <th>Fecha de fin</th>
+            <th>Sustituto</th>
+            <th>Razón</th>
+            <th>Coste</th>
+            <th>Proyecto</th>
+            <th>Estado</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>  
+
+    
+<tr *ngFor="let comision of comisiones" app-editable-comision [comision]="comision">
+</tr>   
+  
