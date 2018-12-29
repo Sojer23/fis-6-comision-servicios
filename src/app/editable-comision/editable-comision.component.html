@@ -1,4 +1,19 @@
-<td *ngIf="!editable">{{comision.investigadorID}}</td>
+<td>{{comision.investigadorID}}</td>
+<td>{{comision.destino}}</td>
+<td>{{comision.fechaInicio}}</td>
+<td>{{comision.fechaFin}}</td>
+<td>{{comision.sustitutoID}}</td>
+<td>{{comision.razon}}</td>
+<td>{{comision.coste}}</td>
+<td>{{comision.proyectoID}}</td>
+<td *ngIf="!editable">{{comision.estado}}</td>
+<td *ngIf="editable">
+    <select class="form-control" [(ngModel)]="comision.estado">
+        <option *ngFor="let estado of estados" [ngValue]="estado">{{estado}}</option>
+    </select>   
+</td>
+
+<!-- <td *ngIf="!editable">{{comision.investigadorID}}</td>
 <td *ngIf="!editable">{{comision.destino}}</td>
 <td *ngIf="!editable">{{comision.fechaInicio}}</td>
 <td *ngIf="!editable">{{comision.fechaFin}}</td>
@@ -17,7 +32,9 @@
 <td *ngIf="editable"><input class="form-control" [(ngModel)]="comision.razon"/></td>
 <td *ngIf="editable"><input class="form-control" [(ngModel)]="comision.coste"/></td>
 <td *ngIf="editable"><input class="form-control" [(ngModel)]="comision.proyectoID"/></td>
-<td *ngIf="editable"><input class="form-control" [(ngModel)]="comision.estado"/></td>
+<td *ngIf="editable"><input class="form-control" [(ngModel)]="comision.estado"/></td> -->
+
+
 
 
 <td><button class="btn" (click)="onEdit()">{{editable ? 'Save': 'Edit'}}</button></td>

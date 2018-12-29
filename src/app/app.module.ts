@@ -10,6 +10,7 @@ import { EditableComisionComponent } from './editable-comision/editable-comision
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ListComisionesComponent } from './list-comisiones/list-comisiones.component';
+import { estadoFilter } from './estadoFilter.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ListComisionesComponent } from './list-comisiones/list-comisiones.compo
     LoginComponent,
     HomeComponent,
     ListComisionesComponent,
+    estadoFilter
   ],
   imports: [
     BrowserModule,

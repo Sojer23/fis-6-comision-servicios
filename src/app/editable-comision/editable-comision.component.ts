@@ -12,6 +12,8 @@ export class EditableComisionComponent implements OnInit {
 
   @Input() comision: Comision;
   editable = false;
+  estados = ["SOLICITADA", "ACEPTADA", "RECHAZADA", "SUBSANACION"]
+
 
 
   constructor(private comisionService: ComisionService) { }
