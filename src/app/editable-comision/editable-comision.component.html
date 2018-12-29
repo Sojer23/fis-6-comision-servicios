@@ -1,0 +1,5 @@
+<td *ngIf="!editable">{{comision.investigadorID}}</td>
+<td *ngIf="!editable">{{comision.destino}}</td>
+<td *ngIf="editable"><input class="form-control" [(ngModel)]="comision.investigadorID"/></td>
+<td *ngIf="editable"><input class="form-control" [(ngModel)]="comision.destino"/></td>
+<td><button class="btn" (click)="onEdit()">{{editable ? 'Save': 'Edit'}}</button></td>

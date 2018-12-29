@@ -1,5 +1,5 @@
 <div *ngIf="selectedComision">
-  {{selectedComision.name}}
+  {{selectedComision.investigadorID}}
 </div>
 
 <table class="table">
@@ -31,12 +31,12 @@
       <td><button class="btn btn-primary" (click)="addComision()">Añadir comisión</button> </td>
   </tr>     
      
-    <tr *ngFor="let comision of comisiones">
-        <td>{{comision.investigadorID}}</td>
-        <td>{{comision.destino}}</td>
-    </tr>    
+    
+
+    <tr *ngFor="let comision of comisiones" app-editable-comision [comision]="comision">
+    </tr>   
+
+ 
+     
 </table>
 
-<!-- <tr *ngFor="let comision of comisiones" app-editable-contact [comision]="comision">
-</tr>    
-</table> -->

@@ -1,4 +1,5 @@
 export class Comision {
+    _id: String;
     investigadorID: String;
     destino: String;
     fechaInicio: String;

@@ -14,6 +14,7 @@ export class ComisionesComponent implements OnInit {
   comisiones: Comision[];
   selectedComision: Comision;
   newComision: Comision = {
+    _id:null,
     investigadorID: null,
     destino: null,
     fechaInicio: null,
@@ -25,7 +26,7 @@ export class ComisionesComponent implements OnInit {
     estado: null,
   };
 
-
+  
   constructor(private comisionService: ComisionService) { }
 
   addComision() {
@@ -33,6 +34,7 @@ export class ComisionesComponent implements OnInit {
       .subscribe(() => {
         this.comisiones.push(this.newComision);
         this.newComision = {
+          _id:null,
           investigadorID: null,
           destino: null,
           fechaInicio: null,
@@ -52,6 +54,10 @@ export class ComisionesComponent implements OnInit {
       .subscribe((comisiones) => {
         this.comisiones = comisiones;
       });
+  }
+
+  onEdit(comision: Comision): void {
+    this.selectedComision = comision;
   }
 
   ngOnInit() {

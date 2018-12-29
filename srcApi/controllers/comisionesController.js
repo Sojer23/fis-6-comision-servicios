@@ -61,8 +61,8 @@ function _getComisiones(req,res){
                 console.error("Error accessing database");
                 res.sendStatus(500);
             } else {
+                console.log("Se han pedido comisiones");
                 res.send(comisiones.map((comision) => {
-                    console.log("Se han pedido comisiones");
                     return comision;
                 }));
             }
