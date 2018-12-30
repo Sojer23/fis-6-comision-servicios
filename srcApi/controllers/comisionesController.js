@@ -60,19 +60,25 @@ function checkComision(comision){
 // Get comision unica por su ID
 function _getComision(req,res){
     try{
-    
-    var _id = req.params._id;
-    console.log(Date()+" - GET api/v1/comisiones/"+_id);
+        console.log(Date()+" - GET api/v1/comisiones/_id");
+        var _id = req.params._id;
 
-    ComisionDB.find({"_id": _id}, (err, comisiones) => {
-        if (err) {
-            console.error("Error accessing database");
-            res.sendStatus(500);
-        } else {
-            console.log("Se ha pedido una comisión");
-            res.send(comisiones);
+        if(!_id){
+            console.log(Date()+"- ERROR. Es necesario incluir el parametro '_id' en esta petición.");
+            res.sendStatus(400); //Bad Request
+        }else{
+            console.log(Date()+" - GET api/v1/comisiones/"+_id);
+
+            ComisionDB.find({"_id": _id}, (err, comisiones) => {
+                if (err) {
+                    console.error("Error accessing database");
+                    res.sendStatus(500);
+                } else {
+                    console.log("Se ha pedido una comisión");
+                    res.send(comisiones);
+                }
+            });
         }
-    });
     }catch(err){
         console.log("Error getting comision by _id (_getComision):"+err);
     }
@@ -106,20 +112,26 @@ function _getComisiones(req,res){
 // Para cada investigador le damos sus comisiones
 function _getComisionesByInvestigador(req,res){
     try{
-
+        console.log(Date()+" - GET /comisiones/investigadorID");
         var investigadorID = req.params.investigadorID;
-        console.log(Date()+" - GET /comisiones/"+investigadorID);
 
-        ComisionDB.find({"investigadorID": investigadorID},(err,comisiones)=>{
-            if(err){
-                console.error("Error accesing DB");
-                res.sendStatus(500);
-            }else{
-                res.send(comisiones.map((comision)=>{
-                    return comision;
-                }));
-            }
-        });
+        if(!investigadorID){
+            console.log(Date()+"- ERROR. Es necesario incluir el parametro 'investigadorID' en esta petición.");
+            res.sendStatus(400); //Bad Request
+        }else{
+            console.log(Date()+" - GET /comisiones/"+investigadorID);
+
+            ComisionDB.find({"investigadorID": investigadorID},(err,comisiones)=>{
+                if(err){
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                }else{
+                    res.send(comisiones.map((comision)=>{
+                        return comision;
+                    }));
+                }
+            });
+        }
     }catch(err){
         console.log("Error getting comisiones by investigadorID (_getComisionesByInvestigador):"+err);
     }
@@ -130,18 +142,24 @@ function _getComisionesByProject(req,res){
     try{
         // Get a single comision
         var proyectoID = req.params.proyectoID;
-        console.log(Date()+" - GET /comisiones/"+proyectoID);
+        console.log(Date()+" - GET /comisiones/proyectoID");
 
-        ComisionDB.find({"proyectoID": proyectoID},(err,comisiones)=>{
-            if(err){
-                console.error("Error accesing DB");
-                res.sendStatus(500);
-            }else{
-                res.send(comisiones.map((comision)=>{
-                    return comision;
-                }));
-            }
-        });
+        if(!proyectoID){
+            console.log(Date()+"- ERROR. Es necesario incluir el parametro 'proyectoID' en esta petición.");
+            res.sendStatus(400); //Bad Request
+        }else{
+            console.log(Date()+" - GET /comisiones/"+proyectoID);
+            ComisionDB.find({"proyectoID": proyectoID},(err,comisiones)=>{
+                if(err){
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                }else{
+                    res.send(comisiones.map((comision)=>{
+                        return comision;
+                    }));
+                }
+            });
+        }
     }catch(err){
         console.log("Error getting comisiones by proyectoID (_getComisionesByProject):"+err);
     }
@@ -153,25 +171,28 @@ function _getComisionesByProject(req,res){
 // Post basico
 function _postComision(req,res){
     try{
-        // Create a new comision
-        if (!req.body){
-            res.sendStatus(400);
-        }
         console.log(Date()+" - POST /comisiones");
-        var comision = req.body;
-        //Se establece a solicitada cada comisión que se inserta
-        comision.estado = "SOLICITADA";
-        if(!checkComision(comision)){
-            res.sendStatus(422);
-        }
-        ComisionDB.create(comision, (err) => {
-            if (err) {
-                console.error(err);
-                res.sendStatus(500);
-            } else {
-                res.sendStatus(201);
+        var newComision = req.body;
+        if(!newComision){
+            console.log(Date()+"- ERROR. Falta el documento para la inserción en la base de datos.");
+            res.sendStatus(400); //Bad Request
+        }else{
+            //Se establece a solicitada cada comisión que se inserta
+            newComision.estado = "SOLICITADA";
+            if(!checkComision(newComision)){
+                console.log(Date()+"- ERROR. Alguno de los campos de la comisión es erroneo o está vacío.");
+                res.sendStatus(422); //Unprocessable Entity
             }
-        });
+            ComisionDB.create(newComision, (err) => {
+                if (err) {
+                    console.error(Date()+"Error accesing DB");
+                    res.sendStatus(500);
+                } else {
+                    console.log(Date()+"- CREATED. Se ha insertado una nueva comisión en la BD.");
+                    res.sendStatus(201);
+                }
+            });
+        }
     }catch(err){
         console.log("Error posting a comisión object (_postComision)"+err);
     }
@@ -194,7 +215,6 @@ function _loadComisiones(req,res){
                     console.error("Error inserting multiple comisiones on DB: "+error);
                     res.sendStatus(404);
                 }
-                
             } else {
                 console.log("Multiple comisones inserted to DB");
                 res.sendStatus(201);
@@ -271,25 +291,30 @@ function _deleteAllComisiones(req,res){
 
 function _deleteComisionById(req,res){
     try{
-        // Delete a single comision
+        console.log(Date()+" - DELETE api/v1/comisiones/_id");
         var _id = req.params._id;
-        console.log(Date()+" - DELETE /comisiones/"+_id);
 
-        ComisionDB.remove({"_id": _id},(err,numRemoved)=>{
-            if(err){
-                console.error("Error accesing DB");
-                res.sendStatus(500);
-            }else{
-                if(numRemoved>1){
-                    console.warn("Incosistent DB: duplicated id");
-                }else if(numRemoved == 0) {
-                    res.sendStatus(404);
-                } else {
-                    console.log("Se ha eliminado la comisión con _id: "+_id);
-                    res.sendStatus(200);
+        if(!_id){
+            console.log(Date()+"- ERROR. Es necesario incluir el parametro '_id' en esta petición.");
+            res.sendStatus(400); //Bad Request
+        }else{
+            console.log(Date()+" - DELETE api/v1/comisiones/"+_id);
+            ComisionDB.remove({"_id": _id},(err,numRemoved)=>{
+                if(err){
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                }else{
+                    if(numRemoved>1){
+                        console.warn("Incosistent DB: duplicated id");
+                    }else if(numRemoved == 0) {
+                        res.sendStatus(404);
+                    } else {
+                        console.log("Se ha eliminado la comisión con _id: "+_id);
+                        res.sendStatus(200);
+                    }
                 }
-            }
-        });
+            });
+        }
     }catch(err){
         console.log("Error deleting a comision (_deleteComisionById): "+ err);
     }
