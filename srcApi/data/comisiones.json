@@ -1,49 +1,137 @@
 {
     
-    "initialData":[
+    "comisiones":[
         {
-            "investigadorID": "25350145E",
+            "investigadorID": "00000001A",
+            "destino": "Cádiz",
+            "fechaInicio": "29/10/2018",
+            "fechaFin": "31/10/2018",
+            "sustitutoID": "00000002B",
+            "razon": "Beca de Movilidad",
+            "coste": 200,
+            "proyectoID": "TB-001",
+            "estado": "SOLICITADA"
+        },
+        {
+            "investigadorID": "00000001A",
             "destino": "Madrid",
             "fechaInicio": "29/10/2018",
-            "fechaFin": "31/12/2018",
-            "sustitutoID": "Pedro Lara",
+            "fechaFin": "31/10/2018",
+            "sustitutoID": "00000002B",
             "razon": "Beca de Movilidad",
-            "coste": 1000,
+            "coste": 500,
             "proyectoID": "BD-001",
             "estado": "ACEPTADA"
         },
         {
-            "investigadorID": "25350345E",
+            "investigadorID": "00000001A",
+            "destino": "Barcelona",
+            "fechaInicio": "29/10/2018",
+            "fechaFin": "31/12/2018",
+            "sustitutoID": "00000002B",
+            "razon": "Beca de Movilidad",
+            "coste": 700,
+            "proyectoID": "ML-002",
+            "estado": "RECHAZADA"
+        },
+        {
+            "investigadorID": "00000001A",
             "destino": "París",
-            "fechaInicio": "27/12/2018",
+            "fechaInicio": "29/10/2018",
             "fechaFin": "31/12/2018",
-            "sustitutoID": "Manuel Carranza",
+            "sustitutoID": "00000003C",
             "razon": "Beca de Movilidad",
-            "coste": 1700,
-            "proyectoID": "ML-001",
-            "estado": "RECHAZADO"
+            "coste": 1000,
+            "proyectoID": "IC-003",
+            "estado": "SUBSANACION"
         },
         {
-            "investigadorID": "25353345E",
+            "investigadorID": "00000002B",
+            "destino": "Granada",
+            "fechaInicio": "29/10/2018",
+            "fechaFin": "31/10/2018",
+            "sustitutoID": "00000001A",
+            "razon": "Beca de Movilidad",
+            "coste": 200,
+            "proyectoID": "TB-001",
+            "estado": "SOLICITADA"
+        },
+        {
+            "investigadorID": "00000002B",
             "destino": "Londres",
-            "fechaInicio": "27/12/2018",
-            "fechaFin": "31/12/2018",
-            "sustitutoID": "José Gallardo",
+            "fechaInicio": "29/10/2018",
+            "fechaFin": "31/10/2018",
+            "sustitutoID": "00000001A",
             "razon": "Beca de Movilidad",
-            "coste": 1700,
-            "proyectoID": "BI-001",
-            "estado": "SOLICITADO"
+            "coste": 500,
+            "proyectoID": "BD-001",
+            "estado": "ACEPTADA"
         },
         {
-            "investigadorID": "28363345E",
-            "destino": "Praga",
-            "fechaInicio": "27/12/2018",
+            "investigadorID": "00000002B",
+            "destino": "Roma",
+            "fechaInicio": "29/10/2018",
             "fechaFin": "31/12/2018",
-            "sustitutoID": "Miguel Esteban",
+            "sustitutoID": "00000001A",
             "razon": "Beca de Movilidad",
-            "coste": 1700,
-            "proyectoID": "XI-001",
-            "estado": "SOLICITADO"
+            "coste": 700,
+            "proyectoID": "ML-002",
+            "estado": "RECHAZADA"
+        },
+        {
+            "investigadorID": "00000002B",
+            "destino": "Dublín",
+            "fechaInicio": "29/11/2018",
+            "fechaFin": "31/12/2018",
+            "sustitutoID": "00000003C",
+            "razon": "Beca de Movilidad",
+            "coste": 1000,
+            "proyectoID": "IC-003",
+            "estado": "SUBSANACION"
+        },
+        {
+            "investigadorID": "00000003C",
+            "destino": "Valencia",
+            "fechaInicio": "29/10/2018",
+            "fechaFin": "11/11/2018",
+            "sustitutoID": "00000002B",
+            "razon": "Beca de Movilidad",
+            "coste": 200,
+            "proyectoID": "TB-001",
+            "estado": "SOLICITADA"
+        },
+        {
+            "investigadorID": "00000003C",
+            "destino": "Zurich",
+            "fechaInicio": "29/10/2018",
+            "fechaFin": "31/01/2019",
+            "sustitutoID": "00000001A",
+            "razon": "Beca de Movilidad",
+            "coste": 500,
+            "proyectoID": "BD-001",
+            "estado": "ACEPTADA"
+        },
+        {
+            "investigadorID": "00000003C",
+            "destino": "Oporto",
+            "fechaInicio": "29/10/2018",
+            "fechaFin": "31/12/2018",
+            "sustitutoID": "00000002B",
+            "razon": "Beca de Movilidad",
+            "coste": 700,
+            "proyectoID": "ML-002",
+            "estado": "RECHAZADA"
+        },
+        {
+            "investigadorID": "00000003C",
+            "destino": "Praga",
+            "fechaInicio": "04/10/2018",
+            "fechaFin": "14/10/2018",
+            "sustitutoID": "00000002B",
+            "razon": "Beca de Movilidad",
+            "coste": 1000,
+            "proyectoID": "IC-003",
+            "estado": "SUBSANACION"
         }]
 
 }
