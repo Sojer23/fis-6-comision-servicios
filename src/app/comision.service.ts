@@ -54,7 +54,7 @@ private handleError<T> (operation = 'operation', result?: T) {
     const url = `${this.comisionesUrl}/comisiones/i/${investigadorID}`;
     return this.http.get<Comision[]>(url)
       .pipe(
-          tap(() => this.log('fetched comisiones investigador = ${investigadorID}')),
+          tap(() => this.log(`fetched comisiones investigador = ${investigadorID}`)),
           catchError(this.handleError('getComisionesByID', []))
       );
   }
@@ -64,7 +64,7 @@ private handleError<T> (operation = 'operation', result?: T) {
     const url = `${this.comisionesUrl}/comisiones/p/${proyectoID}`;
     return this.http.get<Comision[]>(url)
       .pipe(
-          tap(() => this.log('fetched comisiones proyecto = ${proyectoID}')),
+          tap(() => this.log(`fetched comisiones proyecto = ${proyectoID}`)),
           catchError(this.handleError('getComisionesByProject', []))
       );
   }
@@ -77,8 +77,8 @@ private handleError<T> (operation = 'operation', result?: T) {
     const url = `${this.comisionesUrl}/comisiones`;
     return this.http.post(url, comision, {responseType: 'text', headers: headers})
       .pipe(
-          tap(() => this.log('add comision investigadorID =${comision.investigadorID} \
-                , destino = ${comision.destino}')),
+          tap(() => this.log(`add comision investigadorID =${comision.investigadorID} \
+                , destino = ${comision.destino}`)),
           catchError(this.handleError('addComision', []))
       );
   }

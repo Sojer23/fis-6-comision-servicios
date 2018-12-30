@@ -14,8 +14,8 @@ import { ProfileComponent } from './profile/profile.component';
 //Import Auth0 Service
 import { AuthService } from './services/auth.service';
 import { ComisionesInvestigadorComponent } from './comisiones-investigador/comisiones-investigador.component';
-import { AddComisionComponent } from './add-comision/add-comision.component';
 import { ComisionesAdminComponent } from './comisiones-admin/comisiones-admin.component';
+import { SolicitudComisionComponent } from './solicitud-comision/solicitud-comision.component';
 
 
 
@@ -27,8 +27,8 @@ import { ComisionesAdminComponent } from './comisiones-admin/comisiones-admin.co
     ProfileComponent,
     estadoFilter,
     ComisionesInvestigadorComponent,
-    AddComisionComponent,
-    ComisionesAdminComponent
+    ComisionesAdminComponent,
+    SolicitudComisionComponent
   ],
   imports: [
     BrowserModule,

@@ -5,15 +5,27 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comision } from '../comision';
 
 @Component({
-  selector: 'app-add-comision',
-  templateUrl: './add-comision.component.html',
-  styleUrls: ['./add-comision.component.css']
+  selector: 'app-solicitud-comision',
+  templateUrl: './solicitud-comision.component.html',
+  styleUrls: ['./solicitud-comision.component.css']
 })
-export class AddComisionComponent implements OnInit {
+export class SolicitudComisionComponent implements OnInit {
 
+  
   comisionForm: FormGroup;
   submitted = false;
-  comision: Comision;
+  comision: Comision = {
+    _id: null,
+    investigadorID: null,
+    destino: null,
+    fechaInicio: null,
+    fechaFin: null,
+    sustitutoID: null,
+    razon: null,
+    coste: null,
+    proyectoID: null,
+    estado: null,
+  };
 
   constructor(private formBuilder:FormBuilder,
     private comisionService: ComisionService, public auth: AuthService) { }
@@ -45,9 +57,9 @@ export class AddComisionComponent implements OnInit {
       if (this.comisionForm.invalid) {
           return;
       }
-
+      
       if (this.auth.userProfile) {
-        this.comision.investigadorID = this.auth.userProfile.nickname;
+        this.comision.investigadorID = this.auth.userProfile.nickname.toUpperCase();
         this.comision.destino = this.comisionForm.controls['destino'].value;
         this.comision.fechaInicio = this.comisionForm.controls['fechaInicio'].value;
         this.comision.fechaFin = this.comisionForm.controls['fechaFin'].value;
@@ -57,8 +69,9 @@ export class AddComisionComponent implements OnInit {
         this.comision.proyectoID = this.comisionForm.controls['coste'].value;
         this.comision.estado = "SOLICITADA";
 
-        this.comisionService.addComision(this.comision);
+        this.comisionService.addComision(this.comision).subscribe();
         alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.comision))
+        return
       }
       else{
         alert('Login necesario')
