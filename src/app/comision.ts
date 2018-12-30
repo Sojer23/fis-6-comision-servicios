@@ -2,8 +2,8 @@ export class Comision {
     _id: String;
     investigadorID: String;
     destino: String;
-    fechaInicio: String;
-    fechaFin: String;
+    fechaInicio: Date;
+    fechaFin: Date;
     sustitutoID: String;
     razon: String;
     coste: Number;

@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comision } from '../comision';
 import { ActivatedRoute, Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-solicitud-comision',
@@ -35,24 +36,31 @@ export class SolicitudComisionComponent implements OnInit {
     public auth: AuthService) { }
 
   
+  // async loadFormAsync(comisionID:String) {
+  //   let asyncResult = await this.comisionService.getComision(comisionID).toPromise();
+  //   this.comision = asyncResult[0];
+  //   this.createForm();
+  //   return asyncResult;
+  // }
+
   async getAsyncData(comisionID:String) {
-    let asyncResult = await this.comisionService.getComision(comisionID).toPromise();
-    return asyncResult
+    return await this.comisionService.getComision(comisionID).toPromise();
   }
 
   ngOnInit() {
+    this.createForm();
+
     this.route.queryParams.subscribe(
       params => {this.comisionID = params['comisionID'] || null;}
     );
     
     // Si recibimos por parámetro comisionID se trata de un update, obtenemos esa comisión
     if(this.comisionID){
-      this.comision = this.getAsyncData(this.comisionID)[0];
-      console.log(this.comision);
+      this.getAsyncData(this.comisionID).then(comisiones =>{
+        this.comision = comisiones[0];
+        this.createForm();
+      });
     }
-
-    console.log(this.comision.destino)
-    this.createForm();
     
 
   }
@@ -64,8 +72,10 @@ export class SolicitudComisionComponent implements OnInit {
   createForm(){
     this.comisionForm = this.formBuilder.group({
       destino: [this.comision.destino || '' , Validators.required],
-      fechaInicio: [this.comision.fechaInicio || '', Validators.required],
-      fechaFin: [this.comision.fechaFin || '', [Validators.required]],
+      fechaInicio: [ formatDate(this.comision.fechaInicio,'yyyy-MM-dd','en-US')
+        || '', Validators.required],
+      fechaFin: [    formatDate(this.comision.fechaFin,'yyyy-MM-dd','en-US')
+      || '', [Validators.required]],
       sustitutoID: [this.comision.sustitutoID || '', [Validators.required]],
       razon: [this.comision.razon || '', Validators.required],
       coste: [this.comision.coste || '', Validators.required],

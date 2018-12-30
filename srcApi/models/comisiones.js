@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 var comisionSchema = new mongoose.Schema({
     investigadorID: String,
     destino: String,
-    fechaInicio: String,
-    fechaFin: String,
+    fechaInicio: Date,
+    fechaFin: Date,
     sustitutoID: String,
     razon: String,
     coste: Number,
