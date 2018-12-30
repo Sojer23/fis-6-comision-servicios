@@ -10,10 +10,9 @@ import { AuthService } from '../services/auth.service';
 })
 export class ComisionesInvestigadorComponent implements OnInit {
 
-  @Input() investigadorID:String;
-  comisiones: Comision[];
+  investigadorID:String;
+  comisiones: Comision[] = [];
   profile: any;
-
 
   constructor(private comisionService: ComisionService, public auth: AuthService) { }
 
@@ -27,7 +26,6 @@ export class ComisionesInvestigadorComponent implements OnInit {
 
 
   ngOnInit() {
-
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
       console.log("Mostrando las comisiones solicitadas por el investigador: "+ this.profile.nickname);
@@ -41,6 +39,10 @@ export class ComisionesInvestigadorComponent implements OnInit {
         this.getComisionesByID();
       });
     }
+
+
   }
+
+  
 
 }

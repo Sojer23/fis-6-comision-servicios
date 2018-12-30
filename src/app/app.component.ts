@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as auth0 from 'auth0-js';
 import { AuthService } from './services/auth.service';
+import { Profile } from 'selenium-webdriver/firefox';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,8 @@ export class AppComponent implements OnInit{
         });
       }
     }
+
+  
     
   }
 
