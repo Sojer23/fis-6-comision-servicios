@@ -19,6 +19,7 @@ export class AuthService {
   });
 
   userProfile: any;
+  isAdmin: boolean;
 
   constructor(public router: Router) {
     this._idToken = '';
@@ -42,7 +43,24 @@ export class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.localLogin(authResult);
-        this.router.navigate(['/home']);
+        if (this.userProfile) {
+          console.log(this.userProfile);
+        } else {
+          this.getProfile((err, profile) => {
+            if(profile['http://sos1617-02.com/roles'][0] === "admin"){
+              this.isAdmin = true;
+              console.log("El usuario "+ profile.nickname +" ha iniciado sesión como "+ profile['http://sos1617-02.com/roles'][0]);
+              console.log("El usuario "+ profile.nickname +" es administrador: "+ this.isAdmin);
+              this.router.navigate(['/comisionesAdmin']);
+            }else{
+              this.isAdmin = false;
+              console.log("El usuario "+ profile.nickname +" ha iniciado sesión como "+ profile['http://sos1617-02.com/roles'][0]);
+              this.router.navigate(['/comisionesInvestigador']);
+              console.log("El usuario "+ profile.nickname +" es administrador: "+ this.isAdmin);
+            }
+          });
+        }
+        
       } else if (err) {
         this.router.navigate(['/home']);
         console.log(err);
@@ -92,6 +110,7 @@ export class AuthService {
       this._idToken = '';
       this._accessToken = '';
       this._expiresAt = 0;
+      this.isAdmin = false;
       // Remove isLoggedIn flag from localStorage
       localStorage.removeItem('isLoggedIn');
       // Go back to the home route

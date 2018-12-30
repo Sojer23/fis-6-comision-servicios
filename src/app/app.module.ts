@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { routing}  from './app.routing';
 import { EditableComisionComponent } from './editable-comision/editable-comision.component';
-import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { estadoFilter } from './estadoFilter.pipe';
 import { ProfileComponent } from './profile/profile.component';
@@ -23,7 +22,6 @@ import { ComisionesAdminComponent } from './comisiones-admin/comisiones-admin.co
   declarations: [
     AppComponent,
     EditableComisionComponent,
-    LoginComponent,
     HomeComponent,
     ProfileComponent,
     estadoFilter,

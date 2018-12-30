@@ -9,6 +9,8 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit{
 
+  profile: any;
+
   constructor(public auth: AuthService) {
     auth.handleAuthentication();
   }
@@ -17,6 +19,17 @@ export class AppComponent implements OnInit{
     if (localStorage.getItem('isLoggedIn') === 'true') {
       this.auth.renewTokens();
     }
+
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      if (this.auth.userProfile) {
+        this.profile = this.auth.userProfile;
+      } else {
+        this.auth.getProfile((err, profile) => {
+          this.profile = profile;
+        });
+      }
+    }
+    
   }
 
 }
