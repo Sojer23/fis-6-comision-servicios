@@ -7,7 +7,8 @@ var routes = express.Router();
 //ROUTES
 //USERS MANAGEMENT
 routes.route('/v1/comisiones').get(comisionesController.getComisiones);
-routes.route('/v1/comisiones/i/:investigadorID').get(comisionesController.getComisionesByID);
+routes.route('/v1/comisiones/:_id').get(comisionesController.getComision);
+routes.route('/v1/comisiones/i/:investigadorID').get(comisionesController.getComisionesByInvestigador);
 routes.route('/v1/comisiones/p/:proyectoID').get(comisionesController.getComisionesByProject);
 routes.route('/v1/comisiones').post(comisionesController.postComision);
 routes.route('/v1/comisiones/load').post(comisionesController.loadComisiones);

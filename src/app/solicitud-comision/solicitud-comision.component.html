@@ -23,9 +23,9 @@
     </div>
     <div class="form-group row">
         <label class="col-form-label">Sustituto</label>
-        <input type="text" formControlName="sustituto" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sustituto.errors }" />
-        <div *ngIf="submitted && f.sustituto.errors" class="invalid-feedback">
-            <div *ngIf="f.sustituto.errors.required">Sustituto requerido</div>
+        <input type="text" formControlName="sustitutoID" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sustitutoID.errors }" />
+        <div *ngIf="submitted && f.sustitutoID.errors" class="invalid-feedback">
+            <div *ngIf="f.sustitutoID.errors.required">SustitutoID requerido</div>
         </div>
     </div>
     <div class="form-group row">

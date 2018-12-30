@@ -17,8 +17,9 @@ const ESTADOS = ["SOLICITADA", "ACEPTADA", "RECHAZADA", "SUBSANACION"]
 
 //// EXPORT FUNCTIONS /////
 module.exports = {
+    getComision: _getComision,
     getComisiones: _getComisiones,
-    getComisionesByID: _getComisionesByID,
+    getComisionesByInvestigador: _getComisionesByInvestigador,
     getComisionesByProject: _getComisionesByProject,
     postComision: _postComision,
     putComision: _putComision,
@@ -56,6 +57,28 @@ function checkComision(comision){
   
 // GET
 
+// Get comision unica por su ID
+function _getComision(req,res){
+    try{
+    
+    var _id = req.params._id;
+    console.log(Date()+" - GET api/v1/comisiones/"+_id);
+
+    ComisionDB.find({"_id": _id}, (err, comisiones) => {
+        if (err) {
+            console.error("Error accessing database");
+            res.sendStatus(500);
+        } else {
+            console.log("Se ha pedido una comisión");
+            res.send(comisiones);
+        }
+    });
+    }catch(err){
+        console.log("Error getting comision by _id (_getComision):"+err);
+    }
+}
+
+
 // Para el administrador puede solicitar todo, después se filtra en el front end por ESTADO
 
 function _getComisiones(req,res){
@@ -81,10 +104,9 @@ function _getComisiones(req,res){
 
 
 // Para cada investigador le damos sus comisiones
-function _getComisionesByID(req,res){
+function _getComisionesByInvestigador(req,res){
     try{
 
-        // Get a single comision
         var investigadorID = req.params.investigadorID;
         console.log(Date()+" - GET /comisiones/"+investigadorID);
 
@@ -99,7 +121,7 @@ function _getComisionesByID(req,res){
             }
         });
     }catch(err){
-        console.log("Error getting comisiones by investigadorID (_getComisionesByID):"+err);
+        console.log("Error getting comisiones by investigadorID (_getComisionesByInvestigador):"+err);
     }
 }
 

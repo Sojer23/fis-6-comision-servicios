@@ -39,6 +39,16 @@ private handleError<T> (operation = 'operation', result?: T) {
     return of(result as T);
   };
 }
+  
+
+  getComision(_id:String): Observable<Comision[]> {
+    const url = `${this.comisionesUrl}/comisiones/${_id}`;
+    return this.http.get<Comision[]>(url)
+      .pipe(
+          tap(() => this.log('fetched comision')),
+          catchError(this.handleError('getComision', []))
+      );
+  }
 
   getComisiones(): Observable<Comision[]> {
     const url = `${this.comisionesUrl}/comisiones`;
@@ -50,12 +60,12 @@ private handleError<T> (operation = 'operation', result?: T) {
   }
 
 
-  getComisionesByID(investigadorID: String): Observable<Comision[]> {
+  getComisionesByInvestigador(investigadorID: String): Observable<Comision[]> {
     const url = `${this.comisionesUrl}/comisiones/i/${investigadorID}`;
     return this.http.get<Comision[]>(url)
       .pipe(
           tap(() => this.log(`fetched comisiones investigador = ${investigadorID}`)),
-          catchError(this.handleError('getComisionesByID', []))
+          catchError(this.handleError('getComisionesByInvestigador', []))
       );
   }
 
