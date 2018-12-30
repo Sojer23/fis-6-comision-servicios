@@ -27,7 +27,7 @@
         </thead>  
     
         
-    <tr *ngFor="let comision of comisiones | estadoFilter:selectedEstado">
+    <tr *ngFor="let comision of comisiones">
         <td>{{comision.destino}}</td>
         <td>{{comision.fechaInicio}}</td>
         <td>{{comision.fechaFin}}</td>
