@@ -10,15 +10,14 @@ import { AuthService } from '../services/auth.service';
 })
 export class ComisionesInvestigadorComponent implements OnInit {
 
-  investigadorID:String;
   comisiones: Comision[] = [];
   profile: any;
 
   constructor(private comisionService: ComisionService, public auth: AuthService) { }
 
   
-  getComisionesByID() {
-    this.comisionService.getComisionesByID(this.investigadorID.toUpperCase())
+  getComisionesByID(investigadorID: String) {
+    this.comisionService.getComisionesByID(investigadorID.toUpperCase())
       .subscribe((comisiones) => {
         this.comisiones = comisiones;
       });
@@ -29,14 +28,12 @@ export class ComisionesInvestigadorComponent implements OnInit {
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
       console.log("Mostrando las comisiones solicitadas por el investigador: "+ this.profile.nickname);
-      this.investigadorID = this.profile.nickname;
-      this.getComisionesByID();
+      this.getComisionesByID(this.profile.nickname);
     } else {
       this.auth.getProfile((err, profile) => {
         this.profile = profile;
         console.log("Mostrando las comisiones solicitadas por el investigador: "+ this.profile.nickname);
-        this.investigadorID = this.profile.nickname;
-        this.getComisionesByID();
+        this.getComisionesByID(this.profile.nickname);
       });
     }
 

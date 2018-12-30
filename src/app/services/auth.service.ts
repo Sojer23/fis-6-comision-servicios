@@ -55,8 +55,8 @@ export class AuthService {
             }else{
               this.isAdmin = false;
               console.log("El usuario "+ profile.nickname +" ha iniciado sesión como "+ profile['http://sos1617-02.com/roles'][0]);
-              this.router.navigate(['/comisionesInvestigador']);
               console.log("El usuario "+ profile.nickname +" es administrador: "+ this.isAdmin);
+              this.router.navigate(['/comisionesInvestigador']);
             }
           });
         }

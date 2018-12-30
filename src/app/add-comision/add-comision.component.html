@@ -1,3 +1,56 @@
-<p>
-  add-comision works!
-</p>
+<h3>Solicitud de comisión de servicio</h3>
+<form [formGroup]="comisionForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+        <label class="col-form-label">Destino</label>
+        <input type="text" formControlName="destino" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.destino.errors }" />
+        <div *ngIf="submitted && f.destino.errors" class="invalid-feedback">
+            <div *ngIf="f.destino.errors.required">Destino requerido</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label">Fecha de inicio</label>
+        <input type="date" formControlName="fechaInicio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fechaInicio.errors }" />
+        <div *ngIf="submitted && f.fechaInicio.errors" class="invalid-feedback">
+            <div *ngIf="f.fechaInicio.errors.required">Fecha de inicio requerida</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label">Fecha de fin</label>
+        <input type="date" formControlName="fechaFin" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fechaFin.errors }" />
+        <div *ngIf="submitted && f.fechaFin.errors" class="invalid-feedback">
+            <div *ngIf="f.fechaFin.errors.required">Fecha de inicio requerida</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label">Sustituto</label>
+        <input type="text" formControlName="sustituto" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sustituto.errors }" />
+        <div *ngIf="submitted && f.sustituto.errors" class="invalid-feedback">
+            <div *ngIf="f.sustituto.errors.required">Sustituto requerido</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label">Razón</label>
+        <input type="text" formControlName="razon" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.razon.errors }" />
+        <div *ngIf="submitted && f.razon.errors" class="invalid-feedback">
+            <div *ngIf="f.razon.errors.required">Razón requerida</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label">Coste</label>
+        <input type="number" formControlName="coste" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.coste.errors }" />
+        <div *ngIf="submitted && f.coste.errors" class="invalid-feedback">
+            <div *ngIf="f.coste.errors.required">Coste requerido</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label">Proyecto</label>
+        <input type="text" formControlName="proyecto" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.proyecto.errors }" />
+        <div *ngIf="submitted && f.proyecto.errors" class="invalid-feedback">
+            <div *ngIf="f.proyecto.errors.required">Proyecto requerido</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <button class="btn btn-primary">Enviar</button>
+    </div>
+</form>
+
