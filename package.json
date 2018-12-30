@@ -32,6 +32,7 @@
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "fs": "0.0.1-security",
     "hystrixjs": "^0.2.0",
     "mongoose": "^5.3.14",
     "nedb": "^1.8.0",
