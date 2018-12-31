@@ -34,9 +34,6 @@
 <td *ngIf="editable"><input class="form-control" [(ngModel)]="comision.proyectoID"/></td>
 <td *ngIf="editable"><input class="form-control" [(ngModel)]="comision.estado"/></td> -->
 
-
-
-
 <td *ngIf="comision.estado=='SOLICITADA' || comision.estado=='SUBSANACION' ">
     <button class="btn" (click)="onEdit()">{{editable ? 'Guardar': 'Editar'}}</button></td>
 <td>

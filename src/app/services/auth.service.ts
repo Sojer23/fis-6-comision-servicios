@@ -25,6 +25,7 @@ export class AuthService {
     this._idToken = '';
     this._accessToken = '';
     this._expiresAt = 0;
+    this.isAdmin = false;
   }
 
   get accessToken(): string {
@@ -121,6 +122,10 @@ export class AuthService {
       // Check whether the current time is past the
       // access token's expiry time
       return new Date().getTime() < this._expiresAt;
+    }
+
+    public checkAdmin(): boolean{
+      return this.isAdmin;
     }
 
 
