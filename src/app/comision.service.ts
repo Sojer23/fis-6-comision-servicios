@@ -99,8 +99,8 @@ private handleError<T> (operation = 'operation', result?: T) {
     const url = `${this.comisionesUrl}/comisiones`;
     return this.http.put(url, comision, {responseType: 'text', headers: headers})
         .pipe(
-          tap(() => this.log('updated comision investigadorID =${comision.investigadorID} \
-          , destino = ${comision.destino}')),
+          tap(() => this.log(`updated comision investigadorID =${comision.investigadorID} \
+          , destino = ${comision.destino}`)),
           catchError(this.handleError('updateComision', []))
       );    
   }

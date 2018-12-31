@@ -58,7 +58,7 @@ export class SolicitudComisionComponent implements OnInit {
     if(this.comisionID){
       this.getAsyncData(this.comisionID).then(comisiones =>{
         this.comision = comisiones[0];
-        this.createForm();
+        this.loadFormValues();
       });
     }
     
@@ -70,21 +70,32 @@ export class SolicitudComisionComponent implements OnInit {
 
 
   createForm(){
+    console.log(formatDate(Date()+1, 'yyyy-MM-dd', 'en-US'))
     this.comisionForm = this.formBuilder.group({
-      destino: [this.comision.destino || '' , Validators.required],
-      fechaInicio: [ formatDate(this.comision.fechaInicio,'yyyy-MM-dd','en-US')
-        || '', Validators.required],
-      fechaFin: [    formatDate(this.comision.fechaFin,'yyyy-MM-dd','en-US')
-      || '', [Validators.required]],
-      sustitutoID: [this.comision.sustitutoID || '', [Validators.required]],
-      razon: [this.comision.razon || '', Validators.required],
-      coste: [this.comision.coste || '', Validators.required],
-      proyecto: [this.comision.proyectoID || '', Validators.required],
+      destino: ['' , Validators.required],
+      fechaInicio: [ formatDate(Date(), 'yyyy-MM-dd', 'en-US') , Validators.required],
+      fechaFin: [formatDate(Date()+1, 'yyyy-MM-dd', 'en-US')  , [Validators.required]],
+      sustitutoID: ['', [Validators.required]],
+      razon: ['', Validators.required],
+      coste: ['', Validators.required],
+      proyecto: ['', Validators.required],
 
   }, {
       // Poner aqui mas funciones de validación
       // validator: MustMatch('password', 'confirmPassword')
   })
+  }
+
+  loadFormValues(){
+    this.comisionForm.setValue({
+      destino: this.comision.destino,
+      fechaInicio: formatDate(this.comision.fechaInicio,'yyyy-MM-dd','en-US'),
+      fechaFin: formatDate(this.comision.fechaFin,'yyyy-MM-dd','en-US'),
+      sustitutoID: this.comision.sustitutoID,
+      razon: this.comision.razon,
+      coste : this.comision.coste,
+      proyecto: this.comision.proyectoID
+    });
   }
 
   onSubmit() {
