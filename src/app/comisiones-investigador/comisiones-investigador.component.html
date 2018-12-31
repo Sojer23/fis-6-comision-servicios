@@ -28,8 +28,8 @@
         
     <tr *ngFor="let comision of comisiones">
         <td>{{comision.destino}}</td>
-        <td>{{comision.fechaInicio}}</td>
-        <td>{{comision.fechaFin}}</td>
+        <td>{{comision.fechaInicio |  date:'dd/MM/yyyy'}}</td>
+        <td>{{comision.fechaFin |  date:'dd/MM/yyyy'}}</td>
         <td>{{comision.sustitutoID}}</td>
         <td>{{comision.razon}}</td>
         <td>{{comision.coste}}</td>
