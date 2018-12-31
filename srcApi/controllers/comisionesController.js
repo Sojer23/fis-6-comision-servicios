@@ -183,6 +183,7 @@ function _postComision(req,res){
                 console.log(Date()+"- ERROR. Alguno de los campos de la comisión es erroneo o está vacío.");
                 res.sendStatus(422); //Unprocessable Entity
             }
+            else{
             ComisionDB.create(newComision, (err) => {
                 if (err) {
                     console.error(Date()+"Error accesing DB");
@@ -192,6 +193,7 @@ function _postComision(req,res){
                     res.sendStatus(201);
                 }
             });
+        }
         }
     }catch(err){
         console.log("Error posting a comisión object (_postComision)"+err);
