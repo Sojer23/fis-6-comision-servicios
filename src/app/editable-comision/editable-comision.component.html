@@ -39,3 +39,6 @@
 
 <td *ngIf="comision.estado=='SOLICITADA' || comision.estado=='SUBSANACION' ">
     <button class="btn" (click)="onEdit()">{{editable ? 'Guardar': 'Editar'}}</button></td>
+<td>
+    <button type="button" class="btn btn-outline-danger" (click)="onDelete()">Eliminar</button>
+</td>

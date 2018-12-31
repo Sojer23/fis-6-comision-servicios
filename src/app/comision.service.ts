@@ -105,5 +105,14 @@ private handleError<T> (operation = 'operation', result?: T) {
       );    
   }
 
+  deleteComision(_id:String): Observable<Comision[]> {
+    const url = `${this.comisionesUrl}/comisiones/${_id}`;
+    return this.http.delete<Comision[]>(url)
+      .pipe(
+          tap(() => this.log('fetched comision')),
+          catchError(this.handleError('deleteComision', []))
+      );
+  }
+
 
 }

@@ -29,6 +29,10 @@ export class EditableComisionComponent implements OnInit {
       this.editable = ! this.editable;
     }
   }
+  
+  onDelete(): void {
+    this.comisionService.deleteComision(this.comision._id).subscribe()
+  }
 
 
   ngOnInit() {
