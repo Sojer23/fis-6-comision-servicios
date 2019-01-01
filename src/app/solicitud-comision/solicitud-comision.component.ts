@@ -70,7 +70,6 @@ export class SolicitudComisionComponent implements OnInit {
 
 
   createForm(){
-    console.log(formatDate(Date()+1, 'yyyy-MM-dd', 'en-US'))
     this.comisionForm = this.formBuilder.group({
       destino: ['' , Validators.required],
       fechaInicio: [ formatDate(Date(), 'yyyy-MM-dd', 'en-US') , Validators.required],
