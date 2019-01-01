@@ -46,7 +46,7 @@ app.use('/api', routes);
 
 /**ANGULAR APP DIRECTIONS */
 app.use(express.static(path.join(__dirname, COMISIONES_APP_DIR)));
-app.get('/', function(req, res) {
+app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, COMISIONES_APP_DIR, '/index.html'));
 });
 
