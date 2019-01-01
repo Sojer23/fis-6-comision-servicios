@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
+import { environment} from '../../environments/environment.prod';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,7 @@ export class AuthService {
     clientID: 'eFch7yiggVqE4T6Xg7p7B1TC8ZxlREdf',
     domain: 'sos1617-02.eu.auth0.com',
     responseType: 'token id_token',
-    redirectUri: 'http://localhost:3000',
+    redirectUri: environment.production?'https://fis2018-06.herokuapp.com/':'http://localhost:3000',
     scope: 'openid profile'
   });
 
