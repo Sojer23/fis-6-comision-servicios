@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, isDevMode } from '@angular/core';
 import * as auth0 from 'auth0-js';
 import { AuthService } from './services/auth.service';
 import { Profile } from 'selenium-webdriver/firefox';
@@ -14,12 +14,22 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit{
 
   // profile: any;
+  productionMode: boolean;
 
   constructor(public auth: AuthService, private router: Router) {
     auth.handleAuthentication();
   }
 
   ngOnInit() {
+
+    //Controlar si estamos en modo desarrollo o producción
+    if (isDevMode()) {
+      this.productionMode = false;
+      console.log('👋 Development Mode!');
+    } else {
+      this.productionMode = true;
+      console.log('💪 Production Mode!');
+    }
 
     if (this.auth.isAuthenticated()) {
       this.auth.renewTokens();
