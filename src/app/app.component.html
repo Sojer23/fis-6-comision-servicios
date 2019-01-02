@@ -1,11 +1,12 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal text-light">Comisión de Servicios</h5>
+        <h5 class="my-0 mr-md-auto font-weight-normal text-light"><a href="https://fis2018-06.herokuapp.com/">Comisión de Servicios</a></h5>
         <nav class="my-2 my-md-0 mr-md-3">
           <!-- <a class="p-2 text-light" routerLink="/comisionesAdmin" *ngIf="auth.isAuthenticated() && auth.isAdmin">Comisiones</a>
           <a class="p-2 text-light" routerLink="/comisionesInvestigador" *ngIf="auth.isAuthenticated() && !auth.isAdmin">Mis solicitudes</a> -->
           <a class="p-2 text-light" routerLink="/comisionesAdmin" *ngIf="auth.checkAdmin() && auth.isAuthenticated()">Comisiones</a>
           <a class="p-2 text-light" routerLink="/comisionesInvestigador" *ngIf="!auth.checkAdmin() && auth.isAuthenticated()">Mis solicitudes</a>
           <a class="p-2 text-light" routerLink="/profile" *ngIf="auth.isAuthenticated()">Perfil</a>
+          <a class="p-2 text-light" routerLink="/info" *ngIf="!auth.isAuthenticated()">Dev. Info</a>
         </nav>
         <a class="btn btn-outline-primary text-light " (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Login</a>
         <a class="btn btn-outline-primary text-light" (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Logout</a>

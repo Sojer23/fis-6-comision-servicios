@@ -33,15 +33,8 @@ export class EditableComisionComponent implements OnInit {
   onDelete(): void {
     this.comisionService.deleteComision(this.comision._id)
     .subscribe((res) =>{
-      this.comisionService.getComisiones()
-      .subscribe((comisiones) => {
-        
-      });
+      location.reload();
     });
-  }
-
-  onRefresh(): void{
-    
   }
 
 
