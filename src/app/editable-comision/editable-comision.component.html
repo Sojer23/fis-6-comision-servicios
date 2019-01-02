@@ -35,8 +35,11 @@
 <td *ngIf="editable"><input class="form-control" [(ngModel)]="comision.estado"/></td> -->
 
 <td>
-    <button class="btn" (click)="onEdit()" *ngIf="comision.estado=='SOLICITADA' || comision.estado=='SUBSANACION' ">
-        {{editable ? 'Guardar': 'Editar'}}</button></td>
+    <a class="btn" (click)="onEdit()" *ngIf="editable && (comision.estado=='SOLICITADA' || comision.estado=='SUBSANACION') ">
+        <img *ngIf="editable" src="../../assets/utils/save_2.png"></a>
+    <a class="btn" (click)="onEdit()" *ngIf="!editable && (comision.estado=='SOLICITADA' || comision.estado=='SUBSANACION') ">
+        <img *ngIf="!editable" src="../../assets/utils/edit_2.png"></a>
+</td>
 <td>
-    <button type="button" class="btn btn-outline-danger" (click)="onDelete()">Eliminar</button>
+    <a class="btn" (click)="onDelete()"><img src="../../assets/utils/del_2.png"></a>
 </td>
