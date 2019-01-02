@@ -41,13 +41,12 @@ function checkComision(comision){
         comision.coste && 
         comision.proyectoID &&
         comision.estado){
-            console.log("El cuerpo de la comisión está bien definido. Comprobando estado...");
             //Para comprobar que una comisión no trae un estado que no está entre los válidos
             if(!ESTADOS.includes(comision.estado)){
-                console.log("Estado no válido.")
+                console.log(Date()+" -Estado de la comisión no válido.")
                 return false
             }else{
-                console.log("Estado válido. Comisión correcta.")
+                console.log(Date()+" -El cuerpo de la comisión está bien definido. Comprobando estado...");
                 return true
             }
     }else{
@@ -71,16 +70,16 @@ function _getComision(req,res){
 
             ComisionDB.find({"_id": _id}, (err, comisiones) => {
                 if (err) {
-                    console.error("Error accessing database");
+                    console.error(Date()+" -Error accessing database");
                     res.sendStatus(500);
                 } else {
-                    console.log("Se ha pedido una comisión");
+                    console.log(Date()+" -Se ha pedido una comisión");
                     res.send(comisiones);
                 }
             });
         }
     }catch(err){
-        console.log("Error getting comision by _id (_getComision):"+err);
+        console.log(Date()+" -Error getting comision by _id (_getComision):"+err);
     }
 }
 
@@ -94,17 +93,16 @@ function _getComisiones(req,res){
 
         ComisionDB.find((err, comisiones) => {
             if (err) {
-                console.error("Error accessing database");
+                console.error(Date()+" -Error accessing database");
                 res.sendStatus(500);
             } else {
-                console.log("Se han pedido comisiones");
                 res.send(comisiones.map((comision) => {
                     return comision;
                 }));
             }
         });
         }catch(err){
-            console.log("Error getting all comisiones (_getComisiones):"+err);
+            console.log(Date()+" -Error getting all comisiones (_getComisiones):"+err);
         }
 }
 
@@ -123,7 +121,7 @@ function _getComisionesByInvestigador(req,res){
 
             ComisionDB.find({"investigadorID": investigadorID},(err,comisiones)=>{
                 if(err){
-                    console.error("Error accesing DB");
+                    console.error(Date()+" -Error accesing DB");
                     res.sendStatus(500);
                 }else{
                     res.send(comisiones.map((comision)=>{
@@ -133,7 +131,7 @@ function _getComisionesByInvestigador(req,res){
             });
         }
     }catch(err){
-        console.log("Error getting comisiones by investigadorID (_getComisionesByInvestigador):"+err);
+        console.log(Date()+" -Error getting comisiones by investigadorID (_getComisionesByInvestigador):"+err);
     }
 }
 
@@ -151,7 +149,7 @@ function _getComisionesByProject(req,res){
             console.log(Date()+" - GET /comisiones/"+proyectoID);
             ComisionDB.find({"proyectoID": proyectoID},(err,comisiones)=>{
                 if(err){
-                    console.error("Error accesing DB");
+                    console.error(Date()+" -Error accesing DB");
                     res.sendStatus(500);
                 }else{
                     res.send(comisiones.map((comision)=>{
@@ -161,14 +159,13 @@ function _getComisionesByProject(req,res){
             });
         }
     }catch(err){
-        console.log("Error getting comisiones by proyectoID (_getComisionesByProject):"+err);
+        console.log(Date()+" -Error getting comisiones by proyectoID (_getComisionesByProject):"+err);
     }
 }
 
 
 
 // POST
-// Post basico
 function _postComision(req,res){
     try{
         console.log(Date()+" - POST /comisiones");
@@ -196,7 +193,7 @@ function _postComision(req,res){
         }
         }
     }catch(err){
-        console.log("Error posting a comisión object (_postComision)"+err);
+        console.log(Date()+" -Error posting a comisión object (_postComision)"+err);
     }
 }
 
@@ -211,21 +208,21 @@ function _loadComisiones(req,res){
             if (error){ 
                 //Check duplicate email
                 if (error.name = "BulkWriteError" && error.code === 11000) {
-                    console.error("Error. Trying to insert duplicate comision on DB: "+error);
+                    console.error(Date()+" -Error. Trying to insert duplicate comision on DB: "+error);
                     res.send({code: 409});
                 }else{
-                    console.error("Error inserting multiple comisiones on DB: "+error);
+                    console.error(Date()+" -Error inserting multiple comisiones on DB: "+error);
                     res.sendStatus(404);
                 }
             } else {
-                console.log("Multiple comisones inserted to DB");
+                console.log(Date()+" -Multiple comisones inserted to DB");
                 res.sendStatus(201);
             }
         });
         
         
     }catch (err){
-        console.log("Error load initial comisiones (_loadComisiones): "+ err);
+        console.log(Date()+" -Error load initial comisiones (_loadComisiones): "+ err);
     }
 }
 
@@ -238,21 +235,21 @@ function _putComision(req,res){
         console.log(Date()+" - PUT /comisiones/"+updatedComision._id);
 
         if(!updatedComision){
-            console.log("ERROR. PUT request without comision body");
+            console.log(Date()+" -ERROR. PUT request without comision body");
             res.sendStatus(400);//Bad Request
         }else{
             //Comprobar que la comisión a actualizar es correcta
             if(!checkComision(updatedComision)){
-                console.log("WARNING. The body of menu is uncomplete.");
+                console.log(Date()+" -WARNING. The body of menu is uncomplete.");
                 res.sendStatus(422); //Unprocessable entry
             }else{
                 ComisionDB.update({"_id": updatedComision._id},updatedComision,(err,numUpdated)=>{
                     if(err){
-                        console.error("Error accesing DB");
+                        console.error(Date()+" -Error accesing DB");
                         res.sendStatus(500);
                     }else{
                         if(numUpdated>1){
-                            console.warn("Incosistent DB: duplicated id");
+                            console.warn(Date()+" -Incosistent DB: duplicated id");
                         }else if(numUpdated == 0) {
                             res.sendStatus(404);
                         } else {
@@ -263,7 +260,7 @@ function _putComision(req,res){
             }
         }
     }catch(err){
-        console.log("Error uploading comision (_putComision): "+ err);
+        console.log(Date()+" -Error uploading comision (_putComision): "+ err);
     }
 }
 
@@ -274,20 +271,20 @@ function _deleteAllComisiones(req,res){
         console.log(Date()+" - DELETE /comisiones DELETE ALL COMISIONES");
         ComisionDB.deleteMany({}, (err, numRemoved)=>{
             if(err){
-                console.error("Error accesing DB");
+                console.error(Date()+" -Error accesing DB");
                 res.sendStatus(500);
             }else{
                 if(numRemoved.n>1){
-                    console.log("Se han eliminado "+numRemoved.n+" comisiones de la colección Comisiones.")
+                    console.log(Date()+" -Se han eliminado "+numRemoved.n+" comisiones de la colección Comisiones.")
                     res.sendStatus(200);
                 }else if(numRemoved.n == 0) {
                     res.sendStatus(404);
-                    console.log("La colección 'Comisiones' está vacía, no hay nada que borrar.")
+                    console.log(Date()+" -La colección 'Comisiones' está vacía, no hay nada que borrar.")
                 }
             }
         });
     }catch(err){
-        console.log("Error deleting all comisiones (_deleteAllComisiones): "+ err);
+        console.log(Date()+" -Error deleting all comisiones (_deleteAllComisiones): "+ err);
     }
 }
 
@@ -303,21 +300,21 @@ function _deleteComisionById(req,res){
             console.log(Date()+" - DELETE api/v1/comisiones/"+_id);
             ComisionDB.remove({"_id": _id},(err,numRemoved)=>{
                 if(err){
-                    console.error("Error accesing DB");
+                    console.error(Date()+" -Error accesing DB");
                     res.sendStatus(500);
                 }else{
                     if(numRemoved>1){
-                        console.warn("Incosistent DB: duplicated id");
+                        console.warn(Date()+" -Incosistent DB: duplicated id");
                     }else if(numRemoved == 0) {
                         res.sendStatus(404);
                     } else {
-                        console.log("Se ha eliminado la comisión con _id: "+_id);
+                        console.log(Date()+" - Se ha eliminado la comisión con _id: "+_id);
                         res.sendStatus(200);
                     }
                 }
             });
         }
     }catch(err){
-        console.log("Error deleting a comision (_deleteComisionById): "+ err);
+        console.log(Date()+" -Error deleting a comision (_deleteComisionById): "+ err);
     }
 }
