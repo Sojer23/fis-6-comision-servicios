@@ -13,13 +13,13 @@ const routes = require('./routes.js');
 //Dependencias Modelos
 var ApiKey = require('./models/apikeys');
 
-var LocalAPIKeyStrategy = require('passport-localapikey-update').Strategy;
+var LocalAPIKey = require('passport-localapikey-update').Strategy;
 
 //Unión de front-end y back-end
 const COMISIONES_APP_DIR = "../dist/comisiones-app";
 
 // Tell passport to use LocalAPIKey Strategy
-passport.use(new LocalAPIKeyStrategy(
+passport.use(new LocalAPIKey(
     (apikey, done) => {
         ApiKey.findOne({apikey: apikey}, (err, user) => {
             if (err) { return done(err); }

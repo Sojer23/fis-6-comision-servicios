@@ -3,20 +3,24 @@
 var passport = require('passport');
 var express = require('express');
 var comisionesController = require('./controllers/comisionesController.js'); // Comisiones API controller
+var loginController = require('./controllers/loginController.js'); // Login API controller
 var routes = express.Router();
 
 //ROUTES
-const BASE_API_PATH = '/v1/comisiones';
+const BASE_API_PATH_COMISIONES = '/v1/comisiones';
 
-//USERS MANAGEMENT
-routes.route(BASE_API_PATH).get(comisionesController.getComisiones,passport.authenticate('localapikey',{session:false}));
-routes.route(BASE_API_PATH+'/:_id').get(comisionesController.getComision,passport.authenticate('localapikey',{session:false}));
-routes.route(BASE_API_PATH+'/i/:investigadorID').get(comisionesController.getComisionesByInvestigador,passport.authenticate('localapikey',{session:false}));
-routes.route(BASE_API_PATH+'/p/:proyectoID').get(comisionesController.getComisionesByProject,passport.authenticate('localapikey',{session:false}));
-routes.route(BASE_API_PATH).post(comisionesController.postComision,passport.authenticate('localapikey',{session:false}));
-routes.route(BASE_API_PATH+'/load').post(comisionesController.loadComisiones,passport.authenticate('localapikey',{session:false}));
-routes.route(BASE_API_PATH).put(comisionesController.putComision,passport.authenticate('localapikey',{session:false}));
-routes.route(BASE_API_PATH).delete(comisionesController.deleteAllComisiones,passport.authenticate('localapikey',{session:false}));
-routes.route(BASE_API_PATH+'/:_id').delete(comisionesController.deleteComisionById,passport.authenticate('localapikey',{session:false}));
+// LOGIN MANAGEMENT
+routes.route(BASE_API_PATH_COMISIONES+'/login').post(loginController.postUser);
+
+//COMISIONES MANAGEMENT
+routes.route(BASE_API_PATH_COMISIONES).get(passport.authenticate('localapikey',{session:false}),comisionesController.getComisiones);
+routes.route(BASE_API_PATH_COMISIONES+'/:_id').get(passport.authenticate('localapikey',{session:false}),comisionesController.getComision);
+routes.route(BASE_API_PATH_COMISIONES+'/i/:investigadorID').get(passport.authenticate('localapikey',{session:false}),comisionesController.getComisionesByInvestigador);
+routes.route(BASE_API_PATH_COMISIONES+'/p/:proyectoID').get(passport.authenticate('localapikey',{session:false}),comisionesController.getComisionesByProject);
+routes.route(BASE_API_PATH_COMISIONES).post(passport.authenticate('localapikey',{session:false}),comisionesController.postComision);
+routes.route(BASE_API_PATH_COMISIONES+'/load').post(passport.authenticate('localapikey',{session:false}),comisionesController.loadComisiones);
+routes.route(BASE_API_PATH_COMISIONES).put(passport.authenticate('localapikey',{session:false}),comisionesController.putComision);
+routes.route(BASE_API_PATH_COMISIONES).delete(passport.authenticate('localapikey',{session:false}),comisionesController.deleteAllComisiones);
+routes.route(BASE_API_PATH_COMISIONES+'/:_id').delete(passport.authenticate('localapikey',{session:false}),comisionesController.deleteComisionById);
 
 module.exports = routes;
