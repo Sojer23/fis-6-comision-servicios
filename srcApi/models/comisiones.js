@@ -1,3 +1,6 @@
+/**
+ * Define el schema del modelo comision de la API.
+ */
 var mongoose = require('mongoose');
 
 var comisionSchema = new mongoose.Schema({

@@ -3,6 +3,7 @@ var bcrypt = require('bcrypt');
 var uuidv4 = require('uuid/v4');
 var SALT_WORK_FACTOR = 10;
 
+//Esquema de la API key.
 var apiKeySchema = new mongoose.Schema({
     user: String,
     password: String,

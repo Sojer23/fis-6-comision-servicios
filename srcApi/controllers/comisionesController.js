@@ -30,7 +30,6 @@ module.exports = {
 
 
 // Funciones auxiliares
-
 function checkComision(comision){
     if(comision.investigadorID && 
         comision.destino && 

@@ -14,9 +14,9 @@ db.once('open', function() {
     server.app.listen(port);
 
     if(dbUrl === process.env.DB){
-        console.log("Coneccted to Database! (REMOTE)")
+        console.log("Connected to Database! (REMOTE)")
     }else{
-        console.log("Coneccted to Database! (LOCAL)")
+        console.log("Connected to Database! (LOCAL)")
     }
     
 
