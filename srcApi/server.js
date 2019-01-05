@@ -21,6 +21,7 @@ const COMISIONES_APP_DIR = "../dist/comisiones-app";
 // Tell passport to use LocalAPIKey Strategy
 passport.use(new LocalAPIKey(
     (apikey, done) => {
+
         ApiKey.findOne({apikey: apikey}, (err, user) => {
             if (err) { return done(err); }
             if (!user) {
