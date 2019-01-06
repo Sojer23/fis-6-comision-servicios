@@ -1,11 +1,10 @@
 var chai = require('chai');
 var mongoose = require('mongoose');
-var Comision = require('../srcApi/models/comisiones');
-var ComisionDB = Comision.Comision;
+var ComisionDB = require('../srcApi/models/comisiones').Comision;
 var expect = chai.expect;
 
 
-describe('Comision DB Tests', () => {
+describe('Comision DB CRUDs Tests', () => {
 
     before((done) => {
         var dbUrl = (process.env.DB || 'mongodb://localhost/test');
@@ -25,7 +24,7 @@ describe('Comision DB Tests', () => {
     });
 
     it('write a comision in the DB', (done) => {
-        var comision = new Comision(
+        var mComision = new ComisionDB(
             {investigadorID: "00000001A",
                 destino: "Cádiz",
                 fechaInicio: "2018/10/29",
@@ -37,19 +36,18 @@ describe('Comision DB Tests', () => {
                 estado: "SOLICITADA"
             }
         );
-        ComisionDB.save((err, comision) => {
+        mComision.save((err, comision) => {
             expect(err).is.null;
             ComisionDB.find({}, (err, comisiones) => {
                 expect(err).is.null;
                 expect(comisiones).to.have.lengthOf(1);
-                // More "expects" could be done
                 done();
             });
         });
     });
 
    it('update a comision in the DB',(done) => {
-        var comision = new Comision(
+        var mComision = new ComisionDB(
             {investigadorID: "00000001A",
                 destino: "Cádiz",
                 fechaInicio: "2018/10/29",
@@ -62,21 +60,23 @@ describe('Comision DB Tests', () => {
             }
         );
 
-        ComisionDB.save((err, comision) => {
+        mComision.save((err, comision) => {
             expect(err).is.null;
             // Update comision
             comision.destino = "Malaga";
-            ComisionDB.findOneAndUpdate({"investigadorID": comision.investigadorID},comision,(err,updatedComision)=>{
+            ComisionDB.update({"investigadorID": comision.investigadorID},comision,(err)=>{
                 expect(err).is.null;
-                expect(updatedComision).not.null;
-                expect(updatedComision.destino).equals("Malaga");
-                done();
+                ComisionDB.findOne({"investigadorID": comision.investigadorID},(err,updatedComision)=>{
+                    expect(err).is.null;
+                    expect(updatedComision.destino).equals("Malaga");
+                    done();
+                });
             });
          });
     });
 
     it('delete a comision from the DB',(done) => {
-        var comision = new Comision(
+        var mComision = new ComisionDB(
             {investigadorID: "00000001A",
                 destino: "Cádiz",
                 fechaInicio: "2018/10/29",
@@ -89,7 +89,7 @@ describe('Comision DB Tests', () => {
             }
         );
 
-        ComisionDB.save((err, comision) => {
+        mComision.save((err, comision) => {
             expect(err).is.null;
             ComisionDB.deleteOne({"investigadorID": comision.investigadorID},(err)=>{
                 expect(err).is.null;
@@ -107,4 +107,4 @@ describe('Comision DB Tests', () => {
             mongoose.connection.close(done);
         });
     });    
-})
+});
