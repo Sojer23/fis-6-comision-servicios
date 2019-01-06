@@ -14,22 +14,32 @@ db.once('open', function() {
     server.app.listen(port);
 
     if(dbUrl === process.env.DB){
-        console.log("Coneccted to Database! (REMOTE)")
+        console.log("DB: "+ dbUrl)
+        console.log("APIKEY: "+process.env.APIKEY);
+        console.log("Connected to Database! (REMOTE)")
     }else{
-        console.log("Coneccted to Database! (LOCAL)")
+        console.log("Connected to Database! (LOCAL)")
     }
     
 
     console.log("Server ready!");
 
+    // Borra todas las API key en la base de datos
+    ApiKey.deleteMany({}, (err, numRemoved)=>{
+        console.log("APIKEYS eliminadas:"+ numRemoved.n)
+    });
+
+    // Aqui creamos un usuario propio con nuestra API key en una variable de entorno.
+    // TODO: me parece una solucion algo cutre. (Esto ya estaba puesto de antes con un user de test)
     if (ApiKey.find((err, apikeys) => {
+        console.log("Número de APIKEYS guardadas: "+apikeys.length)
         if (apikeys.length == 0) {
-            var testUser = new ApiKey({user: "fis06", password: "asdf"});
+            var testUser = new ApiKey({user: "app", password: "app_pass",apikey:process.env.APIKEY});
             testUser.save(function(err, user) {
                 if(err) {
                     console.log(err);
                   } else {
-                    console.log('user: ' + user.user + ", "+ user.apikey + " saved.");
+                    console.log('Usuario añadido ==> user: ' + user.user + ", "+ user.apikey + " saved.");
                   }
             });        
         }

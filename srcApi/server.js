@@ -7,10 +7,8 @@ var cors = require('cors');
 var path = require('path');
 var passport = require('passport');
 
-
 //Dependencias Documentos
 const routes = require('./routes.js');
-
 
 //Dependencias Modelos
 var ApiKey = require('./models/apikeys');
@@ -19,11 +17,11 @@ var LocalAPIKey = require('passport-localapikey-update').Strategy;
 
 //Unión de front-end y back-end
 const COMISIONES_APP_DIR = "../dist/comisiones-app";
-var BASE_API_PATH = "/api/v1";
 
-
+// Tell passport to use LocalAPIKey Strategy
 passport.use(new LocalAPIKey(
     (apikey, done) => {
+
         ApiKey.findOne({apikey: apikey}, (err, user) => {
             if (err) { return done(err); }
             if (!user) {
@@ -35,6 +33,8 @@ passport.use(new LocalAPIKey(
         });
     }
 ));
+
+
 
 var app = express();
 app.use(bodyParser.json());

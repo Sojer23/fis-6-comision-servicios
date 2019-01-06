@@ -2,10 +2,6 @@
 
 var express = require('express');
 var fs = require('fs');
-var router = express.Router();
-
-//APIKEYS
-var ApiKey = require('../models/apikeys');
 
 //MODELS
 var Comision = require('../models/comisiones.js');
@@ -30,7 +26,6 @@ module.exports = {
 
 
 // Funciones auxiliares
-
 function checkComision(comision){
     if(comision.investigadorID && 
         comision.destino && 
@@ -83,9 +78,7 @@ function _getComision(req,res){
     }
 }
 
-
 // Para el administrador puede solicitar todo, después se filtra en el front end por ESTADO
-
 function _getComisiones(req,res){
         try{
 
@@ -105,7 +98,6 @@ function _getComisiones(req,res){
             console.log(Date()+" -Error getting all comisiones (_getComisiones):"+err);
         }
 }
-
 
 // Para cada investigador le damos sus comisiones
 function _getComisionesByInvestigador(req,res){
@@ -162,8 +154,6 @@ function _getComisionesByProject(req,res){
         console.log(Date()+" -Error getting comisiones by proyectoID (_getComisionesByProject):"+err);
     }
 }
-
-
 
 // POST
 function _postComision(req,res){

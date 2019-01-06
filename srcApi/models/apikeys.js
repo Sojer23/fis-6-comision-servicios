@@ -3,6 +3,7 @@ var bcrypt = require('bcrypt');
 var uuidv4 = require('uuid/v4');
 var SALT_WORK_FACTOR = 10;
 
+//Esquema de la API key.
 var apiKeySchema = new mongoose.Schema({
     user: String,
     password: String,
@@ -12,7 +13,8 @@ var apiKeySchema = new mongoose.Schema({
 // Bcrypt middleware
 apiKeySchema.pre('save', function(next) {
 	var user = this;
-    user.apikey = uuidv4();
+	// TODO: solucion cutre => setea una nueva apikey a no ser que sea nuestra app.
+    user.apikey = user.user=='app'?process.env.APIKEY:uuidv4();
 
 	if(!user.isModified('password')) return next();
 
