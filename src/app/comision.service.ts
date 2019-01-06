@@ -3,6 +3,7 @@ import { Comision } from './comision';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from '../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class ComisionService {
 
   private comisionesUrl = 'api/v1';
+  private apikeyUrl = '?apikey='+ environment.apikey;
 
   constructor(
     private http: HttpClient
@@ -42,7 +44,7 @@ private handleError<T> (operation = 'operation', result?: T) {
   
 
   getComision(_id:String): Observable<Comision[]> {
-    const url = `${this.comisionesUrl}/comisiones/${_id}`;
+    const url = `${this.comisionesUrl}/comisiones/${_id}${this.apikeyUrl}`;
     return this.http.get<Comision[]>(url)
       .pipe(
           tap(() => this.log('fetched comision')),
@@ -51,7 +53,7 @@ private handleError<T> (operation = 'operation', result?: T) {
   }
 
   getComisiones(): Observable<Comision[]> {
-    const url = `${this.comisionesUrl}/comisiones`;
+    const url = `${this.comisionesUrl}/comisiones${this.apikeyUrl}`;
     return this.http.get<Comision[]>(url)
       .pipe(
           tap(() => this.log('fetched comisiones')),
@@ -61,7 +63,7 @@ private handleError<T> (operation = 'operation', result?: T) {
 
 
   getComisionesByInvestigador(investigadorID: String): Observable<Comision[]> {
-    const url = `${this.comisionesUrl}/comisiones/i/${investigadorID}`;
+    const url = `${this.comisionesUrl}/comisiones/i/${investigadorID}${this.apikeyUrl}`;
     return this.http.get<Comision[]>(url)
       .pipe(
           tap(() => this.log(`fetched comisiones investigador = ${investigadorID}`)),
@@ -71,7 +73,7 @@ private handleError<T> (operation = 'operation', result?: T) {
 
 
   getComisionesByProject(proyectoID: String): Observable<Comision[]> {
-    const url = `${this.comisionesUrl}/comisiones/p/${proyectoID}`;
+    const url = `${this.comisionesUrl}/comisiones/p/${proyectoID}${this.apikeyUrl}`;
     return this.http.get<Comision[]>(url)
       .pipe(
           tap(() => this.log(`fetched comisiones proyecto = ${proyectoID}`)),
@@ -84,7 +86,7 @@ private handleError<T> (operation = 'operation', result?: T) {
 
   addComision(comision: Comision): Observable<any> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${this.comisionesUrl}/comisiones`;
+    const url = `${this.comisionesUrl}/comisiones${this.apikeyUrl}`;
     return this.http.post(url, comision, {responseType: 'text', headers: headers})
       .pipe(
           tap(() => this.log(`add comision investigadorID =${comision.investigadorID} \
@@ -96,7 +98,7 @@ private handleError<T> (operation = 'operation', result?: T) {
   updateComision(comision: Comision): Observable<any> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     
-    const url = `${this.comisionesUrl}/comisiones`;
+    const url = `${this.comisionesUrl}/comisiones${this.apikeyUrl}`;
     return this.http.put(url, comision, {responseType: 'text', headers: headers})
         .pipe(
           tap(() => this.log(`updated comision investigadorID =${comision.investigadorID} \
@@ -106,7 +108,7 @@ private handleError<T> (operation = 'operation', result?: T) {
   }
 
   deleteComision(_id:String): Observable<Comision[]> {
-    const url = `${this.comisionesUrl}/comisiones/${_id}`;
+    const url = `${this.comisionesUrl}/comisiones/${_id}${this.apikeyUrl}`;
     return this.http.delete<Comision[]>(url)
       .pipe(
           tap(() => this.log('fetched comision')),
