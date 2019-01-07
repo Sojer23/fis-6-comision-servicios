@@ -12,6 +12,7 @@ export class ComisionesAdminComponent implements OnInit {
 
   comisiones: Comision[];
   selectedEstado: String = "TODAS";
+  selectedID: string = "";
   estados = ["SOLICITADA", "SUBSANACION","ACEPTADA", "RECHAZADA"]
 
 
@@ -27,6 +28,11 @@ export class ComisionesAdminComponent implements OnInit {
 
   ngOnInit() {
     this.getComisiones();
+  }
+
+  clear(){
+    this.selectedEstado = "TODAS";
+    this.selectedID = "";
   }
 
 }

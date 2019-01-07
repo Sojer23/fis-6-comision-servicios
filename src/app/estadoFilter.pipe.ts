@@ -8,12 +8,16 @@ import {Comision} from './comision';
 export class estadoFilter implements PipeTransform {
   ESTADOS:String[] = ["SOLICITADA", "SUBSANACION","ACEPTADA", "RECHAZADA"]
 
-  transform(comisiones: Comision[], estado:String): any {
+  transform(comisiones: Comision[], estado:String, id:string): any {
     if (this.ESTADOS.includes(estado)){
-      return comisiones.filter(comisiones => comisiones.estado == estado);
+      return comisiones.filter(comision => 
+        comision.estado == estado && comision.investigadorID.includes(id));
     }
     else{
-      return comisiones.sort((a,b) => this.ESTADOS.indexOf(a.estado)- this.ESTADOS.indexOf(b.estado));
+      if(comisiones){
+        return comisiones.filter(comision => comision.investigadorID.includes(id))
+        .sort((a,b) => this.ESTADOS.indexOf(a.estado)- this.ESTADOS.indexOf(b.estado));
+      }
     }
   }
 }
