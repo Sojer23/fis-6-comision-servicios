@@ -3,7 +3,7 @@ const pact = require('pact')
 
 const provider = pact({
     consumer: 'client', // current service at hand, it makes it easier to know who would be broken by the change in the provider when we test the contract. 
-    provider: 'ContactService', // required, so we know who will need to verify the pact
+    provider: 'ResearcherService', // required, so we know who will need to verify the pact
     port: 3000, // where the mock service should be listening
     log: path.resolve(__dirname, '../../logs', 'mockserver-integration.log'), // path to the file where   logs should be stored
     logLevel: 'ERROR', // one of 'TRACE', 'DEBUG', 'INFO', 'ERROR', 'FATAL' OR 'WARN'
