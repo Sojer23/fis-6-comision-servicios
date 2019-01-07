@@ -21,7 +21,7 @@ describe('researchers api', () => {
                 })
         });
 
-        it('should get researcher list from server', (done) => {
+        it('should get the list of researchers from server', (done) => {
             researchersResource.getAllResearchers()
               .then((researchers) => {
                 expect(researchers).to.have.lengthOf(3);
