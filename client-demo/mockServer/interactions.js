@@ -49,4 +49,6 @@ module.exports = {
             body: RESEARCHERS_BODY
         }
     }
+
+    // TODO: quizas meter un get con parametro id.
 }
