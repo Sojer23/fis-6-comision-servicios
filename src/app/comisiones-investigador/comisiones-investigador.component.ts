@@ -16,14 +16,12 @@ export class ComisionesInvestigadorComponent implements OnInit {
 
   constructor(private comisionService: ComisionService, public auth: AuthService) { }
 
-  
   getComisionesByInvestigador(investigadorID: String) {
     this.comisionService.getComisionesByInvestigador(investigadorID.toUpperCase())
       .subscribe((comisiones) => {
         this.comisiones = comisiones;
       });
   }
-
 
   ngOnInit() {
     if (this.auth.userProfile) {
@@ -37,10 +35,5 @@ export class ComisionesInvestigadorComponent implements OnInit {
         this.getComisionesByInvestigador(this.profile.nickname);
       });
     }
-
-
   }
-
-  
-
 }

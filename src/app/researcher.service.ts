@@ -10,7 +10,7 @@ import { environment } from '../environments/environment.prod';
 })
 export class ResearcherService {
 
-  private researcherUrl = 'api/v1';
+  private researcherUrl = 'api/v1/researchers/';
   private apikeyUrl = '?apikey='+ environment.apikey;
 
   constructor(
@@ -44,7 +44,8 @@ private handleError<T> (operation = 'operation', result?: T) {
   
 
   getResearcher(dni:String): Observable<Researcher[]> {
-    const url = `${this.researcherUrl}/researcher/${dni}${this.apikeyUrl}`;
+    const url = `${this.researcherUrl}${dni}${this.apikeyUrl}`;
+    console.log(url);
     return this.http.get<Researcher[]>(url)
       .pipe(
           tap(() => this.log('fetched researcher')),
