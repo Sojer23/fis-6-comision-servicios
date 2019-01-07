@@ -36,6 +36,20 @@ const RESEARCHERS_BODY = [
     publications:[]}
 ]
 
+const RESEARCHER_BODY = [
+    {name:"Manuel",
+    surname:"Carranza",
+    dni:"00000001A",
+    certification:"Associate Professor",
+    studyCentre:"Universidad de Sevilla",
+    scientificTechnicalArea:[],
+    department:"LSI",
+    responsible:false,
+    active:true,
+    entryDate:"2019-01-07T12:15:24.964Z",
+    publications:[]}
+]
+
 module.exports = {
     getResearcherList: {
         state: 'it has 3 researchers',
@@ -48,7 +62,17 @@ module.exports = {
             status: 200,
             body: RESEARCHERS_BODY
         }
+    },
+    getResearcherByDNI: {
+        state: 'there is one researcher with this dni',
+        uponReceiving: 'a request to retrieve a researcher by dni',
+        withRequest: {
+            method: 'GET',
+            path: '/api/v1/researchers/00000001A'
+        },
+        willRespondWith: {
+            status: 200,
+            body: RESEARCHER_BODY
+        }
     }
-
-    // TODO: quizas meter un get con parametro id.
 }

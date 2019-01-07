@@ -14,9 +14,20 @@ function getAllResearchersBase() {
     return request.get(url);
 }
 
+function getResearcherByDNIBase(){
+    var url = researchersResource("/researchers/00000001A")
+    console.log(url);
+    return request.get(url);
+}
+
 
 var getAllResearchersCommand = CommandFactory.getOrCreate("Get Researchers")
     .run(getAllResearchersBase)
+    .timeout(100)
+    .build()
+
+var getResearcherByDNICommand = CommandFactory.getOrCreate("Get Researcher by DNI")
+    .run(getResearcherByDNIBase)
     .timeout(100)
     .build()
 
@@ -24,6 +35,12 @@ function getAllResearchers() {
     return getAllResearchersCommand.execute();
 }
 
+function getResearcherByDNI(){
+    return getResearcherByDNICommand.execute();
+}
+
+
 module.exports = {
-    getAllResearchers
+    getAllResearchers,
+    getResearcherByDNI
 }

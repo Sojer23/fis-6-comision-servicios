@@ -15,7 +15,7 @@ describe('researchers api', () => {
 
     describe('#getAllResearchers', () => {
         before(done => {
-            provider.addInteraction(interactions.getContactList)
+            provider.addInteraction(interactions.getResearcherList)
                 .then(() => {
                     done();
                 })
@@ -31,7 +31,24 @@ describe('researchers api', () => {
                 done();
               }, done);
         }) 
-    })
+    });
 
-    // TODO: hace run test con un get por dni
+    describe('#getResearcherByDNI', () => {
+        before(done => {
+            provider.addInteraction(interactions.getResearcherByDNI)
+                .then(() => {
+                    done();
+                })
+        });
+
+        it('should get a specific researcher by dni from server', (done) => {
+            researchersResource.getResearcherByDNI()
+              .then((researchers) => {
+                expect(researchers).to.have.lengthOf(1);
+                expect(researchers).to.contain.an.item.with.property('name', 'Manuel');
+                expect(researchers).to.contain.an.item.with.property('dni','00000001A')
+                done();
+              }, done);
+        }) 
+    });
 })
