@@ -1,18 +1,19 @@
-var server = require('../server');
+var server = require('../srcApi/server');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var sinon = require('sinon');
-var Contact = require('../contacts');
-var ApiKey = require('../apikeys');
+var Comision = require('../srcApi/models/comisiones').Comision;
+//var ApiKey = require('../apikeys');
 var expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('Contacts API', () => {
+describe('Comisions API', () => {
 
     before(() => {
-        var ApiKeyStub = sinon.stub(ApiKey, 'findOne');
-        ApiKeyStub.yields(null, new ApiKey({user: "test"}));    
+        //var ApiKeyStub = sinon.stub(ApiKey, 'findOne');
+        //ApiKeyStub.yields(null, new ApiKey({user: "test"}));
+        process.env.APIKEY = 'C6DFA0B215B2CF24EF04794F718A3FC8'
     })
 
     it('hola mundo de prueba', (done) => {
@@ -34,66 +35,114 @@ describe('Contacts API', () => {
                     expect(res).to.have.status(200);
                     expect(res).to.be.html;
                     done();
-                });        
+                });
         });
     });
 
-    describe('GET /contacts', () => {
-        var contact = new Contact({"name": "pepe", "phone": 6666});
-        var contactMock = sinon.mock(contact);
-        contactMock.expects('cleanup').returns({"name": "pepe", "phone": 6666});
+    //TODO: // Get comision unica por su ID
 
-        var ContactStub = sinon.stub(Contact, 'find');
-        ContactStub.yields(null, [contact]);
+    // Para el administrador puede solicitar todo
+    describe('GET /comisiones', () => {
+        var apikey = process.env.APIKEY;
+        //console.log(apikey);
+        var comision = new Comision({investigadorID: 0, destino: "Londres", fechaInicio: "15/10/2019", fechaFin: "15/09/2020", sustitutoID: 1, razon : "Ninguna", coste:1000,proyectoID : 1, estado:"SOLICITADA" });
+        var comisionMock = sinon.mock(comision);
+        comisionMock.expects('cleanup').returns({"investigadorID": 0, "destino": "Londres", "fechaInicio": "15/10/2019", "fechaFin": "15/09/2020", "sustitutoID": 1, "razon" : "Ninguna", "coste":1000, "proyectoID" : 1, "estado":"SOLICITADA" });
 
-        it('should return all contacts', (done) => {
+        var ComisionStub = sinon.stub(Comision, 'find');
+        ComisionStub.yields(null, [comision]);
+
+        it('should return all comisiones', (done) => {
             chai.request(server.app)
-                .get('/api/v1/contacts')
-                .query({apikey: "test"})
+                .get('/api/v1/comisiones')
+                .query({apikey: apikey})
                 .end((err, res) => {
                     expect(res).to.have.status(200);
                     expect(res.body).to.be.an('array');
                     expect(res.body).to.have.lengthOf(1);
-                    contactMock.verify();
+                    comisionMock.verify();
                     done();
-                });  
+                });
         });
+
     });
 
-    describe('POST /contacts', () => {
-        it('should create a new contact', (done) => {
-            var contact = {"name": "jaime", "phone":1111};
-            var dbMock = sinon.mock(Contact);
-            dbMock.expects('create').withArgs(contact).yields(null);
-    
+    //TODO: // Para cada investigador le damos sus comisiones
+
+    //TODO: // Comisiones de cada proyecto
+    /*describe('GET /comisiones proyecto', () => {
+        var apikey = process.env.APIKEY;
+        var proyectoID = 1
+        //console.log(apikey);
+        var comision = new Comision({investigadorID: 0, destino: "Londres", fechaInicio: "15/10/2019", fechaFin: "15/09/2020", sustitutoID: 1, razon : "Ninguna", coste:1000,proyectoID : 1, estado:"SOLICITADA" });
+        var comisionMock = sinon.mock(comision);
+        comisionMock.expects('cleanup').returns({"investigadorID": 0, "destino": "Londres", "fechaInicio": "15/10/2019", "fechaFin": "15/09/2020", "sustitutoID": 1, "razon" : "Ninguna", "coste":1000, "proyectoID" : 1, "estado":"SOLICITADA" });
+        var ComisionStub = sinon.stub(Comision, 'find');
+        ComisionStub.yields(null, [comision]);
+
+        it('should return all comisiones', (done) => {
             chai.request(server.app)
-                .post('/api/v1/contacts')
-                .send(contact)
+                .get('/api/v1/comisiones')
+                .query({apikey: apikey, proyectoID: proyectoID })
+                .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.an('array');
+                    expect(res.body).to.have.lengthOf(1);
+                    comisionMock.verify();
+                    done();
+                });
+        });
+    });*/
+
+    // POST
+    describe('POST /comisiones', () => {
+        var apikey = process.env.APIKEY;
+        after(function(){
+          Comision.create.restore();
+        });
+        it('should create a new comision', (done) => {
+            var comision = new Comision({investigadorID: 0, destino: "Londres", fechaInicio: "15/10/2019", fechaFin: "15/09/2020", sustitutoID: 1, razon : "Ninguna", coste:1000,proyectoID : 1, estado:"SOLICITADA" });
+            var dbMock = sinon.mock(Comision);
+            dbMock.expects('create').withArgs(comision).yields(null);
+
+            chai.request(server.app)
+                .post('/api/v1/comisiones')
+                .query({apikey: apikey})
+                .send(comision)
                 .end((err, res) => {
                     expect(res).to.have.status(201);
                     dbMock.verify();
                     done();
-                });  
+                });
 
         });
-    });    
-
-    describe('POST /contacts', () => {
+    });
+  describe('POST /comisiones', () => {
+        var apikey = process.env.APIKEY;
         it('should return 500 if fails', (done) => {
-            var contact = {"name": "jaime", "phone":1111};
-            var dbMock = sinon.mock(Contact);
-            dbMock.expects('create').withArgs(contact).yields(true);
-    
+            var comision = new Comision({investigadorID: 0, destino: "Londres", fechaInicio: "15/10/2019", fechaFin: "15/09/2018", sustitutoID: 1, razon : "Ninguna", coste:-2,proyectoID : 1, estado:"estadomal" });
+            var dbMock = sinon.mock(Comision);
+            dbMock.expects('create').withArgs(comision).yields(true);
+
             chai.request(server.app)
-                .post('/api/v1/contacts')
-                .send(contact)
+                .post('/api/v1/comisiones')
+                .query({apikey: apikey})
+                .send(comision)
                 .end((err, res) => {
                     expect(res).to.have.status(500);
                     dbMock.verify();
                     done();
-                });  
+                });
 
         });
-    });    
+    });
+
+    //TODO: //LOAD a bunch of comisiones
+
+    //TODO: // Put para que el administrador cambie el estado
+
+    //TODO: //Remove all comisiones
+
+    //TODO: // deleteComisionById
 
 });
