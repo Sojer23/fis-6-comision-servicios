@@ -1,0 +1,115 @@
+{
+  "consumer": {
+    "name": "Grupo6"
+  },
+  "provider": {
+    "name": "Grupo1"
+  },
+  "interactions": [
+    {
+      "description": "a request to retrieve the list of researchers",
+      "providerState": "it has 3 researchers",
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/researchers"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": [
+          {
+            "name": "Manuel",
+            "surname": "Carranza",
+            "dni": "00000001A",
+            "certification": "Associate Professor",
+            "studyCentre": "Universidad de Sevilla",
+            "scientificTechnicalArea": [
+
+            ],
+            "department": "LSI",
+            "responsible": false,
+            "active": true,
+            "entryDate": "2019-01-07T12:15:24.964Z",
+            "publications": [
+
+            ]
+          },
+          {
+            "name": "Miguel",
+            "surname": "Esteban",
+            "dni": "00000003C",
+            "certification": "Associate Professor",
+            "studyCentre": "Escuela Tecnica Superior de Ingenieria Informatica",
+            "scientificTechnicalArea": [
+              "Deep Learning",
+              "Machine Learning"
+            ],
+            "department": "LSI",
+            "responsible": false,
+            "active": true,
+            "entryDate": "2019-01-07T12:26:17.916Z",
+            "publications": [
+
+            ]
+          },
+          {
+            "name": "José",
+            "surname": "Gallardo Gallardo",
+            "dni": "00000002B",
+            "certification": "Associate Professor",
+            "studyCentre": "Escuela Tecnica Superior de Ingenieria Informatica",
+            "scientificTechnicalArea": [
+              "Cloud",
+              "SLA"
+            ],
+            "department": "LSI",
+            "responsible": false,
+            "active": true,
+            "entryDate": "2019-01-07T12:28:26.729Z",
+            "publications": [
+
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "description": "a request to retrieve a researcher by dni",
+      "providerState": "there is one researcher with this dni",
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/researchers/00000001A"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": [
+          {
+            "name": "Manuel",
+            "surname": "Carranza",
+            "dni": "00000001A",
+            "certification": "Associate Professor",
+            "studyCentre": "Universidad de Sevilla",
+            "scientificTechnicalArea": [
+
+            ],
+            "department": "LSI",
+            "responsible": false,
+            "active": true,
+            "entryDate": "2019-01-07T12:15:24.964Z",
+            "publications": [
+
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
