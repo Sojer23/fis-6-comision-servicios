@@ -3,7 +3,7 @@ import { Comision } from './comision';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { environment } from '../environments/environment.prod';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import { environment } from '../environments/environment.prod';
 export class ComisionService {
 
   private comisionesUrl = 'api/v1';
-  private apikeyUrl = '?apikey='+ environment.apikey;
+  private apikeyUrl = '?apikey='+ sessionStorage.getItem('apiKey');
 
   constructor(
     private http: HttpClient
