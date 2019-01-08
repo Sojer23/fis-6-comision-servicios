@@ -8,7 +8,9 @@
     <div class="form-row">
     <div class="form-group col-md-6">
         <label class="col-form-label">Destino</label>
-        <input type="text" formControlName="destino" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.destino.errors }" />
+
+        <input id="f_elem_city" type="text" formControlName="destino" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.destino.errors }" />
+
         <div *ngIf="submitted && f.destino.errors" class="invalid-feedback">
             <div *ngIf="f.destino.errors.required">Destino requerido</div>
         </div>
