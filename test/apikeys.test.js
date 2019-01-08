@@ -72,7 +72,22 @@ describe('ApiKey DB Tests', () => {
 
     after((done) => {
         mongoose.connection.db.dropDatabase(() => {
-            mongoose.connection.close(done);
+
+            ApiKeyDB.find((err, apikeys) => {
+                console.log("Número de APIKEYS guardadas: "+apikeys.length)
+                if (apikeys.length == 0) {
+                    var testUser = new ApiKeyDB({user: "app", password: "app_pass",apikey:process.env.APIKEY});
+                    testUser.save(function(err, user) {
+                        if(err) {
+                            console.log(err);
+                          } else {
+                            console.log('Usuario añadido después de test ==> user: ' + user.user + ", "+ user.apikey + " saved.");
+                            mongoose.connection.close(done);
+                          }
+                    });        
+                }
+        
+            })
         });
     });   
 });

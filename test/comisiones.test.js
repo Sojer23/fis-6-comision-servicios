@@ -1,6 +1,7 @@
 var chai = require('chai');
 var mongoose = require('mongoose');
 var ComisionDB = require('../srcApi/models/comisiones').Comision;
+var comisionesLoad = require('../srcApi/data/comisiones.json');
 var expect = chai.expect;
 
 
@@ -103,8 +104,21 @@ describe('Comision DB CRUDs Tests', () => {
     });
 
     after((done) => {
+
         mongoose.connection.db.dropDatabase(() => {
-            mongoose.connection.close(done);
+            ComisionDB.create(comisionesLoad.comisiones, function (error, docs) {
+                if (error){
+                    //Check duplicate email
+                    if (error.name = "BulkWriteError" && error.code === 11000) {
+                        expect(error).is.null;
+                    }else{
+                        expect(error).is.null;
+                    }
+                } else {
+                    console.log(Date()+" -Multiple comisones inserted to DB after test.");
+                    mongoose.connection.close(done);
+                }
+            });
         });
     });    
 });
