@@ -76,14 +76,42 @@ export class SolicitudComisionComponent implements OnInit {
       fechaFin: [formatDate(Date()+1, 'yyyy-MM-dd', 'en-US')  , [Validators.required]],
       sustitutoID: ['', [Validators.required]],
       razon: ['', Validators.required],
-      coste: ['', Validators.required],
+      coste: ['', [Validators.required, Validators.max(100000)]],
       proyecto: ['', Validators.required],
 
   }, {
       // Poner aqui mas funciones de validación
-      // validator: MustMatch('password', 'confirmPassword')
+      validator: this.dateCheck('fechaInicio', 'fechaFin')
   })
   }
+
+
+
+  dateCheck(fechaInicio: string, fechaFin: string) {
+    return (formGroup: FormGroup) => {
+        const fechaInicioControl = formGroup.controls[fechaInicio];
+        const fechaFinControl = formGroup.controls[fechaFin];
+
+        if (fechaFinControl.errors && !fechaFinControl.errors.dateCheck) {
+          // return if another validator has already found an error
+          return;
+        }
+
+        let fInicio = new Date(fechaInicioControl.value);
+        let fFin = new Date(fechaFinControl.value);
+
+  
+        console.log(fInicio > fFin)
+        // set error on matchingControl if validation fails
+        if (fInicio > fFin) {
+            fechaFinControl.setErrors({ dateCheck: true });
+        } else {
+            fechaFinControl.setErrors(null);
+        }
+     }
+  }
+
+
 
   loadFormValues(){
     this.comisionForm.setValue({

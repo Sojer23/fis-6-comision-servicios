@@ -1,6 +1,6 @@
 <div class="row mt-5 mb-4">
     <h3 class="pl-2">Nombre investigador</h3>
-    <div class="ml-auto ">
+    <div class="ml-auto">
         <a class="btn btn-primary text-light" routerLink="/solicitudComision">Solicitar nueva comisión</a>
     </div>
 </div>
@@ -36,7 +36,7 @@
         <td>{{comision.proyectoID}}</td>
         <td>{{comision.estado}}</td>
         <td *ngIf="comision.estado=='SUBSANACION' ">
-            <button class="btn" routerLink="/solicitudComision" [queryParams]="{ comisionID: comision._id }">Editar</button></td>
+            <button class="btn" routerLink="/solicitudComision" [queryParams]="{ comisionID: comision._id }"><img src="../../assets/utils/edit_2.png"></button></td>
     </tr>   
     </table>
 </div>

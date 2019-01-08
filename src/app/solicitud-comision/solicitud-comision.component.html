@@ -1,56 +1,74 @@
-<h3>Solicitud de comisión de servicio</h3>
+<div class="card border-dark mt-5">
+
+<h3 class="card-header">Solicitud de comisión de servicio</h3>
+
+
+<div class="card-body">
 <form [formGroup]="comisionForm" (ngSubmit)="onSubmit()">
-    <div class="form-group row">
+    <div class="form-row">
+    <div class="form-group col-md-6">
         <label class="col-form-label">Destino</label>
         <input type="text" formControlName="destino" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.destino.errors }" />
         <div *ngIf="submitted && f.destino.errors" class="invalid-feedback">
             <div *ngIf="f.destino.errors.required">Destino requerido</div>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group col-md-3">
         <label class="col-form-label">Fecha de inicio</label>
         <input type="date" formControlName="fechaInicio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fechaInicio.errors }" />
         <div *ngIf="submitted && f.fechaInicio.errors" class="invalid-feedback">
             <div *ngIf="f.fechaInicio.errors.required">Fecha de inicio requerida</div>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group col-md-3">
         <label class="col-form-label">Fecha de fin</label>
         <input type="date" formControlName="fechaFin" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fechaFin.errors }" />
         <div *ngIf="submitted && f.fechaFin.errors" class="invalid-feedback">
-            <div *ngIf="f.fechaFin.errors.required">Fecha de inicio requerida</div>
+            <div *ngIf="f.fechaFin.errors.required">Fecha de fin requerida</div>
+            <div *ngIf="f.fechaFin.errors.dateCheck">Fecha de fin debe ser posterior a inicio</div>
         </div>
     </div>
-    <div class="form-group row">
+    </div>
+
+    <div class="form-row">
+    <div class="form-group col-md-6">
         <label class="col-form-label">Sustituto</label>
         <input type="text" formControlName="sustitutoID" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sustitutoID.errors }" />
         <div *ngIf="submitted && f.sustitutoID.errors" class="invalid-feedback">
-            <div *ngIf="f.sustitutoID.errors.required">SustitutoID requerido</div>
+            <div *ngIf="f.sustitutoID.errors.required">Sustituto requerido</div>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group col-md-6">
         <label class="col-form-label">Razón</label>
         <input type="text" formControlName="razon" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.razon.errors }" />
         <div *ngIf="submitted && f.razon.errors" class="invalid-feedback">
             <div *ngIf="f.razon.errors.required">Razón requerida</div>
         </div>
     </div>
-    <div class="form-group row">
+    </div>
+
+    <div class="form-row">
+    <div class="form-group  col-md-6">
         <label class="col-form-label">Coste</label>
         <input type="number" formControlName="coste" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.coste.errors }" />
         <div *ngIf="submitted && f.coste.errors" class="invalid-feedback">
             <div *ngIf="f.coste.errors.required">Coste requerido</div>
+            <div *ngIf="f.coste.errors.max">Valor máximo 100000</div>
         </div>
+
     </div>
-    <div class="form-group row">
+    <div class="form-group  col-md-6">
         <label class="col-form-label">Proyecto</label>
         <input type="text" formControlName="proyecto" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.proyecto.errors }" />
         <div *ngIf="submitted && f.proyecto.errors" class="invalid-feedback">
             <div *ngIf="f.proyecto.errors.required">Proyecto requerido</div>
         </div>
     </div>
-    <div class="form-group row">
-        <button class="btn btn-primary">Enviar</button>
+    </div>
+    <div class="form-group form-row">
+        <button class="btn btn-primary ml-auto">Enviar</button>
     </div>
 </form>
+</div>
 
+</div>
