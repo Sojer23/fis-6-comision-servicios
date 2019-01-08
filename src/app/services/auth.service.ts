@@ -143,8 +143,6 @@ private handleError<T> (operation = 'operation', result?: T) {
       this._idToken = authResult.idToken;
       this._expiresAt = expiresAt;
       this.getApiKey("app").subscribe((user)=>{
-        console.log(user);
-        console.log(user.apikey);
         this._apiKey = user.apikey;
         sessionStorage.setItem('apiKey', String(this._apiKey));
       });
