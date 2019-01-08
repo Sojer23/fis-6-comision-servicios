@@ -23,12 +23,12 @@ function getResearcherByDNIBase(){
 
 var getAllResearchersCommand = CommandFactory.getOrCreate("Get Researchers")
     .run(getAllResearchersBase)
-    .timeout(100)
+    .timeout(1000)
     .build()
 
 var getResearcherByDNICommand = CommandFactory.getOrCreate("Get Researcher by DNI")
     .run(getResearcherByDNIBase)
-    .timeout(100)
+    .timeout(1000)
     .build()
 
 function getAllResearchers() {
