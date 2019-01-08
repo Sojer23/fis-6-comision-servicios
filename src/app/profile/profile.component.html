@@ -14,12 +14,12 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        Nombre
+                                        {{ researcher?.name }}, {{ researcher?.surname }}
                                     </h5>
                                     <h6>
-                                        Departamento
+                                        {{ researcher?.department }}
                                     </h6>
-                                    <p>Universidad de Sevilla</p>
+                                    <p>{{ researcher?.studyCentre }}</p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Datos</a>
@@ -56,7 +56,7 @@
                                                 <label>Nombre</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{researcher[0]?.name}}</p>
+                                                <p>{{researcher?.name}}, {{ researcher?.surname }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -69,10 +69,10 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Teléfono</label>
+                                                <label>Cargo</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>A rellenar</p>
+                                                <p>{{ researcher?.certification }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -80,7 +80,7 @@
                                                 <label>Departamento</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>A rellenar</p>
+                                                <p>{{ researcher?.department }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -88,7 +88,7 @@
                                                 <label>Más datos</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Incluir tantos datos como nos de el grupo 1</p>
+                                                <p>...</p>
                                             </div>
                                         </div>
                             </div>

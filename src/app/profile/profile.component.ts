@@ -11,7 +11,8 @@ import { ResearcherService } from '../researcher.service';
 export class ProfileComponent implements OnInit {
 
   profile: any;
-  researcher: Researcher[]=[];
+  researcher: any;
+  //researcher: Researcher[]=[];
   rol: string;
 
   constructor(private researcherService: ResearcherService, public auth: AuthService) { }
@@ -21,7 +22,7 @@ export class ProfileComponent implements OnInit {
     this.researcherService.getResearcher(dni.toUpperCase())
       .subscribe((researcher) => {
         this.researcher = researcher;
-        console.log(researcher);
+        console.log("Investigador: "+JSON.stringify(researcher));
       });
   }
 
