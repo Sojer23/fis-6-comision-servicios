@@ -10,7 +10,7 @@ import { environment } from '../environments/environment.prod';
 })
 export class ResearcherService {
 
-  private researcherUrl = 'http://fis2018-01.herokuapp.com/api/v1/researchers/';
+  private researcherUrl = 'https://fis2018-01.herokuapp.com/api/v1/researchers/';
   private apikeyUrl = '?apikey='+ environment.apikeyG1;
 
   constructor(
