@@ -27,6 +27,19 @@ comisionSchema.methods.cleanup = function() {
         estado: this.estado};
 }
 
+comisionSchema.methods.cleanup = function() {
+    return {
+      investigadorID: this.investigadorID,
+      destino: this.destino,
+      fechaInicio: this.fechaInicio,
+      fechaFin: this.fechaFin,
+      sustitutoID: this.sustitutoID,
+      razon: this.razon,
+      coste: this.coste,
+      proyectoID: this.proyectoID,
+      estado: this.estado };
+}
+
 var Comision = mongoose.model('Comision', comisionSchema);
 
 module.exports.mongoose = mongoose;

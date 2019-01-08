@@ -11,7 +11,7 @@ var port = (process.env.PORT || 3000);
 const opts = {
     providerBaseUrl: 'http://localhost:3000', // where your service will be running during the test, either staging or localhost on CI
     providerStatesSetupUrl: 'http://localhost:3000/test/setup', // the url to call to set up states
-    pactUrls: ['http://localhost:8080/pacts/provider/ContactService/consumer/client/latest'], // the pacts to test against
+    pactUrls: ['https://universidaddesevilla.pact.dius.com.au/pacts/provider/Grupo1/consumer/Grupo6/latest'], // the pacts to test against
     customProviderHeaders: ['apikey: test']
 }
 

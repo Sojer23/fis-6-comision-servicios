@@ -27,13 +27,13 @@ module.exports = {
 
 // Funciones auxiliares
 function checkComision(comision){
-    if(comision.investigadorID && 
-        comision.destino && 
-        comision.fechaInicio && 
-        comision.fechaFin && 
-        comision.sustitutoID && 
+    if(comision.investigadorID &&
+        comision.destino &&
+        comision.fechaInicio &&
+        comision.fechaFin &&
+        comision.sustitutoID &&
         comision.razon &&
-        comision.coste && 
+        comision.coste &&
         comision.proyectoID &&
         comision.estado){
             //Para comprobar que una comisión no trae un estado que no está entre los válidos
@@ -46,9 +46,9 @@ function checkComision(comision){
             }
     }else{
         return false
-    }    
+    }
   }
-  
+
 // GET
 
 // Get comision unica por su ID
@@ -90,6 +90,7 @@ function _getComisiones(req,res){
                 res.sendStatus(500);
             } else {
                 res.send(comisiones.map((comision) => {
+                    comision.cleanup()
                     return comision;
                 }));
             }
@@ -191,11 +192,11 @@ function _postComision(req,res){
 function _loadComisiones(req,res){
     try{
         console.log(Date()+" - POST /comisiones/");
- 
+
         var comisiones = JSON.parse(fs.readFileSync(__dirname+'/../data/comisiones.json', 'utf8'));
 
         ComisionDB.create(comisiones.comisiones, function (error, docs) {
-            if (error){ 
+            if (error){
                 //Check duplicate email
                 if (error.name = "BulkWriteError" && error.code === 11000) {
                     console.error(Date()+" -Error. Trying to insert duplicate comision on DB: "+error);
@@ -209,8 +210,8 @@ function _loadComisiones(req,res){
                 res.sendStatus(201);
             }
         });
-        
-        
+
+
     }catch (err){
         console.log(Date()+" -Error load initial comisiones (_loadComisiones): "+ err);
     }

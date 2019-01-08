@@ -2,7 +2,7 @@ sudo: required
 language: node_js
 node_js:
   - "9"
-#Servicios que se van a usar  
+#Servicios que se van a usar
 services:
   - docker
 
@@ -17,6 +17,7 @@ install:
 #Ejecución de comandos
 script:
   - ng build --prod --aot
+  - npm test
   # build docker images
   - docker build -t fis18-06 .
 

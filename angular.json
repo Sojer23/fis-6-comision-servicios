@@ -23,10 +23,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/jquery-ui.css"
             ],
             "scripts": [
-              "node_modules/auth0-js/build/auth0.js"
+              "node_modules/auth0-js/build/auth0.js",
+              "src/assets/jquery.min.js",
+              "src/assets/jquery-ui.min.js",
+              "src/cities.js"
             ]
           },
           "configurations": {
