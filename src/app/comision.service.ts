@@ -3,7 +3,7 @@ import { Comision } from './comision';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-
+import { AuthService } from './services/auth.service'
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,21 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class ComisionService {
 
   private comisionesUrl = 'api/v1';
-  private apikeyUrl = '?apikey='+ sessionStorage.getItem('apiKey');
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  
+  private apikeyUrl;  
+
+  
+  constructor(private http: HttpClient, public auth: AuthService) { 
+    if(sessionStorage.getItem('apiKey')){
+      this.apikeyUrl = '?apikey='+ sessionStorage.getItem('apiKey');
+    }
+    else{
+      let apikey = '';
+      auth.getApiKey("app").subscribe((user)=>{apikey = user.apikey;});
+      this.apikeyUrl = '?apikey=' + apikey;
+    }
+  }
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
