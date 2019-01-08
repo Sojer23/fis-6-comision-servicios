@@ -1,5 +1,5 @@
 # Comisión de Servicios - FIS - Grupo 6
-Desarrollo de microservicio destinado a la gestión de la comisión de servicios asociado a un proyecto de investigación en la universidad.
+Desarrollo de microservicio destinado a la gestión de la comisión de servicios asociado a un proyecto de investigación en la universidad de Sevilla.
 
 ## Ejecución del servidor
 
