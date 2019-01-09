@@ -34,7 +34,6 @@ Tras la ejecución del comando en la consola nos aparecerá el puerto en el que 
 
 Si accedemos al navegador debería estar disponible.
 
-
 ### Lanzamiento Remoto
 
 
