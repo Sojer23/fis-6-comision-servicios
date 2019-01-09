@@ -16,7 +16,7 @@ setTimeout(function() {
         }
        );
       },
-      minLength: 3,
+      minLength: 2,
       select: function (event, ui) {
        var selectedObj = ui.item;
        jQuery("#f_elem_city").val(selectedObj.value);
