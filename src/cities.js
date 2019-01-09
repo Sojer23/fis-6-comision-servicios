@@ -1,4 +1,4 @@
-var delayInMilliseconds = 3000; //1 second
+var delayInMilliseconds = 3000; //3 second
 
 setTimeout(function() {
   jQuery(function ()
@@ -16,7 +16,7 @@ setTimeout(function() {
         }
        );
       },
-      minLength: 2,
+      minLength: 3,
       select: function (event, ui) {
        var selectedObj = ui.item;
        jQuery("#f_elem_city").val(selectedObj.value);
