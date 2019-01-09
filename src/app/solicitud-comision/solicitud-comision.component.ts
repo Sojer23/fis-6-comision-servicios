@@ -141,7 +141,7 @@ export class SolicitudComisionComponent implements OnInit {
         this.comision.sustitutoID = this.comisionForm.controls['sustitutoID'].value;
         this.comision.razon = this.comisionForm.controls['razon'].value;
         this.comision.coste = this.comisionForm.controls['coste'].value;
-        this.comision.proyectoID = this.comisionForm.controls['coste'].value;
+        this.comision.proyectoID = this.comisionForm.controls['proyecto'].value;
         this.comision.estado = "SOLICITADA";
         
         if(this.comisionID){
