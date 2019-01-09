@@ -22,7 +22,6 @@ export class ProfileComponent implements OnInit {
     this.researcherService.getResearcher(dni.toUpperCase())
       .subscribe((researcher) => {
         this.researcher = researcher;
-        console.log("Investigador: "+JSON.stringify(researcher));
       });
   }
 
