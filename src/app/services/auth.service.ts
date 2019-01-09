@@ -53,13 +53,21 @@ export class AuthService {
               sessionStorage.setItem('isAdmin', String(true));
               console.log("El usuario "+ profile.nickname +" ha iniciado sesión como "+ profile['http://sos1617-02.com/roles'][0]);
               console.log("El usuario "+ profile.nickname +" es administrador: "+ this.isAdmin);
-              this.router.navigate(['/comisionesAdmin']);
+              this.getApiKey("app").subscribe((user)=>{
+                this._apiKey = user.apikey;
+                sessionStorage.setItem('apiKey', String(this._apiKey));
+                this.router.navigate(['/comisionesAdmin']);
+              });
             }else{
               this.isAdmin = false;
               sessionStorage.setItem('isAdmin', String(false));
               console.log("El usuario "+ profile.nickname +" ha iniciado sesión como "+ profile['http://sos1617-02.com/roles'][0]);
               console.log("El usuario "+ profile.nickname +" es administrador: "+ this.isAdmin);
-              this.router.navigate(['/comisionesInvestigador']);
+              this.getApiKey("app").subscribe((user)=>{
+                this._apiKey = user.apikey;
+                sessionStorage.setItem('apiKey', String(this._apiKey));
+                this.router.navigate(['/comisionesInvestigador']);
+              });
             }
           });
         }
