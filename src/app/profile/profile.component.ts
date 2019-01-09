@@ -28,13 +28,11 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
-      console.log("Here 1");
       this.getResearcher(this.profile.nickname);
       this.rol = this.profile['http://sos1617-02.com/roles'][0];
     } else {
       this.auth.getProfile((err, profile) => {
         this.profile = profile;
-        console.log("Here 2");
         this.getResearcher(this.profile.nickname);
         this.rol = this.profile['http://sos1617-02.com/roles'][0];
       });
