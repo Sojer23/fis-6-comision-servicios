@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit{
 
-  // profile: any;
+  profile: any;
   productionMode: boolean;
 
   constructor(public auth: AuthService, private router: Router) {
@@ -34,13 +34,13 @@ export class AppComponent implements OnInit{
     if (this.auth.isAuthenticated()) {
       this.auth.renewTokens();
       // Esto ya se hace en handleAuthentication()
-      // if (this.auth.userProfile) {
-      //   this.profile = this.auth.userProfile;
-      // } else {
-      //   this.auth.getProfile((err, profile) => {
-      //     this.profile = profile;
-      //   });
-      // }
+      if (this.auth.userProfile) {
+        this.profile = this.auth.userProfile;
+      } else {
+        this.auth.getProfile((err, profile) => {
+          this.profile = profile;
+        });
+      }
     }
     else{
       this.router.navigate(['/']);
