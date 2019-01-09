@@ -4,20 +4,19 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class ComisionService {
 
   private comisionesUrl = 'api/v1';
+
   
   private apikeyUrl =  '?apikey='+ sessionStorage.getItem('apiKey');  
 
   
   constructor(private http: HttpClient) { 
   }
-
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
