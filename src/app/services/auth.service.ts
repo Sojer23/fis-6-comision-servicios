@@ -150,10 +150,10 @@ private handleError<T> (operation = 'operation', result?: T) {
       this._accessToken = authResult.accessToken;
       this._idToken = authResult.idToken;
       this._expiresAt = expiresAt;
-      this.getApiKey("app").subscribe((user)=>{
-        this._apiKey = user.apikey;
-        sessionStorage.setItem('apiKey', String(this._apiKey));
-      });
+      // this.getApiKey("app").subscribe((user)=>{
+      //   this._apiKey = user.apikey;
+      //   sessionStorage.setItem('apiKey', String(this._apiKey));
+      // });
 
       //  NO Set isLoggedIn flag in sessionStorage
       //sessionStorage.setItem('isLoggedIn', 'true');
