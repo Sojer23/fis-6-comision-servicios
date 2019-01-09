@@ -1,4 +1,4 @@
-var delayInMilliseconds = 1000; //1 second
+var delayInMilliseconds = 3000; //3 second
 
 setTimeout(function() {
   jQuery(function ()
