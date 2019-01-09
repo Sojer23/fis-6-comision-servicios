@@ -122,7 +122,7 @@ private handleError<T> (operation = 'operation', result?: T) {
     }
 
 
-    public getApiKey(user:String): Observable<any> {
+    private getApiKey(user:String): Observable<any> {
       let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       const url = `${this.comisionesUrl}/comisiones/login`;
       let appUser = {user: `${user}`, password: "app_pass"}
