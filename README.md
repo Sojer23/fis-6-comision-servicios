@@ -8,9 +8,9 @@ Desarrollo de microservicio destinado a la gestión de la comisión de servicios
 - [x] Integración con APIs externas (API del grupo 1 y API de capitales del mundo)
 - [x] Implementación del patrón circuit breaker en la conexión con la API del grupo 1
 - [x] Documentación de la API en Postman (https://documenter.getpostman.com/view/1788279/RznBPLvL)
-- [x] Control de autenticación usando Auth0
+- [x] Control de autenticación usando Auth0. Separando entre roles de usuarios (investigador/administrador).
 - [x] Secure Apikey login: El usuario recibe la API key al iniciar sesión y la almacena en sessionStorage, evitando tener que poner la API en el código de forma pública
-- [x] Filtro de solicitudes en la vista del administrador usando Pipes de Angular
+- [x] Filtro de solicitudes en la vista del administrador usando Pipes de Angular.
 
 
 
